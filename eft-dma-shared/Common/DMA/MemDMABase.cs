@@ -1,14 +1,15 @@
-﻿global using static eft_dma_shared.Common.DMA.MemoryInterface;
+﻿global using static Common.DMA.MemoryInterface;
 using VmmFrost;
 using System.Diagnostics;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity.LowLevel.Hooks;
+using Common.Misc;
+using Common.Unity.LowLevel.Hooks;
+using eft_dma_shared;
+using Common.DMA.ScatterAPI;
 
-namespace eft_dma_shared.Common.DMA
+namespace Common.DMA
 {
     internal static class MemoryInterface
     {
@@ -105,7 +106,7 @@ namespace eft_dma_shared.Common.DMA
                     _hVMM = new Vmm(initArgs);
                 }
                 SetCustomVMMRefresh();
-                MemoryInterface.Memory = this;
+                Memory = this;
                 LoneLogging.WriteLine("DMA Initialized!");
             }
             catch (Exception ex)
@@ -439,7 +440,7 @@ namespace eft_dma_shared.Common.DMA
             try
             {
                 uint flags = useCache ? 0 : Vmm.FLAG_NOCACHE;
-                _hVMM.MemReadAs<T>(_pid, addr, out result, flags);
+                _hVMM.MemReadAs(_pid, addr, out result, flags);
             }
             catch (VmmException)
             {
@@ -522,7 +523,7 @@ namespace eft_dma_shared.Common.DMA
         /// <exception cref="Exception"></exception>
         public string ReadString(ulong addr, int length, bool useCache = true) // read n bytes (string)
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(length, (int)0x1000, nameof(length));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(length, 0x1000, nameof(length));
             Span<byte> buffer = stackalloc byte[length];
             buffer.Clear();
             ReadBuffer(addr, buffer, useCache, true);
@@ -540,7 +541,7 @@ namespace eft_dma_shared.Common.DMA
             if (length % 2 != 0)
                 length++;
             length *= 2; // Unicode 2 bytes per char
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(length, (int)0x1000, nameof(length));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(length, 0x1000, nameof(length));
             Span<byte> buffer = stackalloc byte[length];
             buffer.Clear();
             ReadBuffer(addr + 0x14, buffer, useCache, true);
@@ -798,7 +799,7 @@ namespace eft_dma_shared.Common.DMA
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ADDRESS_AND_SIZE_TO_SPAN_PAGES(ulong va, uint size) =>
-            (uint)(BYTE_OFFSET(va) + size + (0x1000ul - 1) >> (int)12);
+            (uint)(BYTE_OFFSET(va) + size + (0x1000ul - 1) >> 12);
 
         /// <summary>
         /// The BYTE_OFFSET macro takes a virtual address and returns the byte offset
@@ -812,14 +813,14 @@ namespace eft_dma_shared.Common.DMA
         /// Always rounds up.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint AlignLength(uint length) => (length + 7) & ~7u;
+        public static uint AlignLength(uint length) => length + 7 & ~7u;
 
         /// <summary>
         /// Returns an address aligned to 8 bytes.
         /// Always the next aligned address.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong AlignAddress(ulong address) => (address + 7) & ~7ul;
+        public static ulong AlignAddress(ulong address) => address + 7 & ~7ul;
 
         #endregion
 

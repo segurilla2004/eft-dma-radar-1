@@ -1,10 +1,10 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.Features;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
+﻿using LonesEFTRadar.Tarkov.Features;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using Common.Features;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class NoRecoil : MemWriteFeature<NoRecoil>
     {

@@ -1,4 +1,4 @@
-﻿namespace eft_dma_radar.UI.ColorPicker
+﻿namespace LonesEFTRadar.UI.ColorPicker
 {
     /// <summary>
     /// Defines a Color Menu Item in Color Picker.

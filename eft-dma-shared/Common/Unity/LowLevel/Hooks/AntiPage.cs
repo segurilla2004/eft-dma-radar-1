@@ -1,12 +1,13 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using System.Buffers.Binary;
+﻿using System.Buffers.Binary;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using eft_dma_shared;
+using Common.DMA;
+using Common.Misc;
 
-namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
+namespace Common.Unity.LowLevel.Hooks
 {
     public static class AntiPage
     {
@@ -53,7 +54,7 @@ namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
             ulong pagesBase = MemDMABase.PAGE_ALIGN(va);
             for (uint p = 0; p < pageCount; p++)
             {
-                _registeredVa.Add(pagesBase + (p * 0x1000));
+                _registeredVa.Add(pagesBase + p * 0x1000);
             }
         }
 

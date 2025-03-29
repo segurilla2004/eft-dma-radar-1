@@ -1,7 +1,6 @@
-﻿using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc.Pools;
 
-namespace eft_dma_shared.Common.DMA.ScatterAPI
+namespace Common.DMA.ScatterAPI
 {
     /// <summary>
     /// Defines a Scatter Read Round. Each round will execute a single scatter read. If you have reads that

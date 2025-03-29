@@ -1,14 +1,15 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.UI.Radar;
+﻿using arena_dma_radar.UI.Radar;
 using arena_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using arena_dma_radar.Arena.Features.MemoryWrites;
-using eft_dma_shared.Common.Misc.Data;
+using LonesArenaRadar;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Unity;
+using Common.Features;
+using Common.Misc.Data;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.GameWorld
+namespace LonesArenaRadar.Arena.GameWorld
 {
     public sealed class LocalGameWorld : IDisposable
     {
@@ -280,7 +281,7 @@ namespace arena_dma_radar.Arena.GameWorld
                 LoneLogging.WriteLine("Realtime thread starting...");
                 while (InRaid)
                 {
-                    if (Program.Config.RatelimitRealtimeReads || !CameraManagerBase.EspRunning || (MemWriteFeature<Aimbot>.Instance.Enabled && Aimbot.Engaged))
+                    if (Program.Config.RatelimitRealtimeReads || !CameraManagerBase.EspRunning || MemWriteFeature<Aimbot>.Instance.Enabled && Aimbot.Engaged)
                         _refreshWait.AutoWait(TimeSpan.FromMilliseconds(1), 1000);
                     ct.ThrowIfCancellationRequested();
                     RealtimeLoop(); // Realtime update loop (player positions, etc.)

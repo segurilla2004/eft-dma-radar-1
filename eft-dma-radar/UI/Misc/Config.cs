@@ -1,18 +1,19 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer.Plugins;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_radar.UI.ColorPicker.ESP;
-using eft_dma_radar.UI.ColorPicker.Radar;
+﻿using Common.DMA;
+using Common.ESP;
+using Common.Misc.Config;
+using Common.Players;
+using Common.Unity;
+using Common.Unity.LowLevel;
 using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.LootFilters;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Config;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel;
-using static eft_dma_radar.Tarkov.API.EFTProfileService;
+using LonesEFTRadar;
+using LonesEFTRadar.Tarkov.EFTPlayer.Plugins;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using LonesEFTRadar.UI.ColorPicker.ESP;
+using LonesEFTRadar.UI.ColorPicker.Radar;
+using LonesEFTRadar.UI.LootFilters;
+using static LonesEFTRadar.Tarkov.API.EFTProfileService;
 
-namespace eft_dma_radar.UI.Misc
+namespace LonesEFTRadar.UI.Misc
 {
     /// <summary>
     /// Global Program Configuration (Config.json)
@@ -22,13 +23,13 @@ namespace eft_dma_radar.UI.Misc
         #region ISharedConfig
 
         [JsonIgnore]
-        public bool MemWritesEnabled => this.MemWrites.MemWritesEnabled;
+        public bool MemWritesEnabled => MemWrites.MemWritesEnabled;
         [JsonIgnore]
-        public LowLevelCache LowLevelCache => this.Cache.LowLevel;
+        public LowLevelCache LowLevelCache => Cache.LowLevel;
         [JsonIgnore]
-        public ChamsConfig ChamsConfig => this.MemWrites.Chams;
+        public ChamsConfig ChamsConfig => MemWrites.Chams;
         [JsonIgnore]
-        public bool AdvancedMemWrites => this.MemWrites.AdvancedMemWrites;
+        public bool AdvancedMemWrites => MemWrites.AdvancedMemWrites;
 
         #endregion
 
@@ -158,7 +159,7 @@ namespace eft_dma_radar.UI.Misc
         /// </summary>
         [JsonPropertyName("lootPPS")]
         public bool LootPPS { get; set; }
-        
+
         /// <summary>
         /// Loot Price Mode.
         /// </summary>
@@ -925,8 +926,8 @@ namespace eft_dma_radar.UI.Misc
         /// True if all values add up to 100% exactly, otherwise False.
         /// </summary>
         [JsonIgnore]
-        public bool Is100Percent => (HeadPercent >= 0 && TorsoPercent >= 0 && ArmsPercent >= 0 && LegsPercent >= 0) &&
-            (HeadPercent + TorsoPercent + ArmsPercent + LegsPercent == 100);
+        public bool Is100Percent => HeadPercent >= 0 && TorsoPercent >= 0 && ArmsPercent >= 0 && LegsPercent >= 0 &&
+            HeadPercent + TorsoPercent + ArmsPercent + LegsPercent == 100;
 
         /// <summary>
         /// Reset all values to defaults.

@@ -1,4 +1,4 @@
-﻿namespace arena_dma_radar.UI.ColorPicker
+﻿namespace LonesArenaRadar.UI.ColorPicker
 {
     /// <summary>
     /// Defines a Color Menu Item in Color Picker.

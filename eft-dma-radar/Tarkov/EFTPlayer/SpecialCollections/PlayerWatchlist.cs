@@ -1,8 +1,9 @@
-﻿using eft_dma_radar.UI.Misc;
-using eft_dma_radar.UI.Radar;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.Misc;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.SpecialCollections
+namespace LonesEFTRadar.Tarkov.EFTPlayer.SpecialCollections
 {
     /// <summary>
     /// Wrapper class to manage Player Watchlist.
@@ -40,7 +41,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.SpecialCollections
         /// </summary>
         private void Update()
         {
-            this.Entries = _bindingList
+            Entries = _bindingList
                 .DistinctBy(x => x.AcctID)
                 .ToDictionary(
                     item => item.AcctID, // key

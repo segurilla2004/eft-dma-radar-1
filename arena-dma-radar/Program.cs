@@ -29,13 +29,14 @@ global using eft_dma_shared.Common;
 using System.Runtime.Versioning;
 using arena_dma_radar;
 using arena_dma_radar.UI.Radar;
-using arena_dma_radar.UI.Misc;
 using arena_dma_radar.Arena;
 using arena_dma_radar.UI.ESP;
-using eft_dma_shared.Common.Maps;
-using arena_dma_radar.Arena.Features;
-using eft_dma_shared.Common.Misc.Data;
 using eft_dma_shared.Common.UI;
+using LonesArenaRadar.Arena.Features;
+using LonesArenaRadar;
+using LonesArenaRadar.UI.Misc;
+using Common.Maps;
+using Common.Misc.Data;
 
 [assembly: AssemblyTitle(Program.Name)]
 [assembly: AssemblyProduct(Program.Name)]
@@ -43,9 +44,9 @@ using eft_dma_shared.Common.UI;
 [assembly: AssemblyCopyright("BSD Zero Clause License ©2025 lone-dma")]
 [assembly: SupportedOSPlatform("Windows")]
 
-namespace arena_dma_radar
+namespace LonesArenaRadar
 {
-    internal static class Program 
+    internal static class Program
     {
         internal const string Name = "Arena DMA Radar";
 
@@ -73,7 +74,7 @@ namespace arena_dma_radar
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
         }
@@ -87,12 +88,12 @@ namespace arena_dma_radar
                 TryImportLoneCfg();
                 ConfigPath.Create();
                 var config = Config.Load();
-                eft_dma_shared.SharedProgram.Initialize(ConfigPath, config);
+                SharedProgram.Initialize(ConfigPath, config);
                 Config = config;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
             }
         }
@@ -116,7 +117,7 @@ namespace arena_dma_radar
             {
                 MessageBox.Show("ERROR Importing Lone Config(s)." +
                     $"Exception Info: {ex}",
-                    Program.Name,
+                    Name,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
@@ -135,7 +136,7 @@ namespace arena_dma_radar
             loading.UpdateStatus("Loading Map Assets...", 35);
             LoneMapManager.ModuleInit();
             loading.UpdateStatus("Starting DMA Connection...", 50);
-            MemoryInterface.ModuleInit();
+            ModuleInit();
             loading.UpdateStatus("Loading Remaining Modules...", 75);
             FeatureManager.ModuleInit();
             ResourceJanitor.ModuleInit(new Action(CleanupWindowResources));

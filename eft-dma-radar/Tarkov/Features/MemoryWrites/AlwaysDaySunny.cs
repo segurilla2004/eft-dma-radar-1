@@ -1,10 +1,11 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using LonesEFTRadar.Tarkov.Features;
+using LonesEFTRadar.Tarkov.GameWorld;
+using Common.Features;
+using Common.Misc;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class AlwaysDaySunny : MemWriteFeature<AlwaysDaySunny>
     {

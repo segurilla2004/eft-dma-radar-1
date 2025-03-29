@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc.Pools;
 using System.Runtime.InteropServices;
 
-namespace eft_dma_shared.Common.Unity.Collections
+namespace Common.Unity.Collections
 {
     /// <summary>
     /// DMA Wrapper for a C# Dictionary

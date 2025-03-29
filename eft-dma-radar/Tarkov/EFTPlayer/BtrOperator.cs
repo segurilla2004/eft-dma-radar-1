@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.DMA.ScatterAPI;
+﻿using Common.DMA.ScatterAPI;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer
+namespace LonesEFTRadar.Tarkov.EFTPlayer
 {
     /// <summary>
     /// BTR Bot Operator.

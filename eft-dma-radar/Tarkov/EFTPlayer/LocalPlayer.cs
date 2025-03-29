@@ -1,13 +1,13 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer.Plugins;
-using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.Tarkov.EFTPlayer.Plugins;
+using Common.Unity.Collections;
+using Common.Players;
+using Common.DMA;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer
+namespace LonesEFTRadar.Tarkov.EFTPlayer
 {
     public sealed class LocalPlayer : ClientPlayer, ILocalPlayer
     {
@@ -49,7 +49,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             if (!(classType == "LocalPlayer" || classType == "ClientPlayer"))
                 throw new ArgumentOutOfRangeException(nameof(classType));
             IsHuman = true;
-            this.Firearm = new(this);
+            Firearm = new(this);
             if (IsPmc)
             {
                 var entryPtr = Memory.ReadPtr(Info + Offsets.PlayerInfo.EntryPoint);
@@ -57,7 +57,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             }
             else if (IsScav)
             {
-                var profileIdPtr = Memory.ReadPtr(this.Profile + Offsets.Profile.Id);
+                var profileIdPtr = Memory.ReadPtr(Profile + Offsets.Profile.Id);
                 ProfileId = Memory.ReadUnityString(profileIdPtr);
             }
             ulong id = ulong.Parse(AccountID);
@@ -69,7 +69,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// </summary>
         public void RefreshWishlist()
         {
-            var wishlistManager = Memory.ReadPtr(this.Profile + Offsets.Profile.WishlistManager);
+            var wishlistManager = Memory.ReadPtr(Profile + Offsets.Profile.WishlistManager);
             var itemsPtr = Memory.ReadPtr(wishlistManager + Offsets.WishlistManager.Items);
             using var items = MemDictionary<Types.MongoID, int>.Get(itemsPtr);
             var wishlist = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -95,8 +95,8 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <param name="index"></param>
         public override void OnRealtimeLoop(ScatterReadIndex index)
         {
-            index.AddEntry<MemPointer>(-10, this.MovementContext + Offsets.MovementContext.CurrentState);
-            index.AddEntry<MemPointer>(-11, this.HandsControllerAddr);
+            index.AddEntry<MemPointer>(-10, MovementContext + Offsets.MovementContext.CurrentState);
+            index.AddEntry<MemPointer>(-11, HandsControllerAddr);
             index.Callbacks += x1 =>
             {
                 if (x1.TryGetResult<MemPointer>(-10, out var currentState))
@@ -113,7 +113,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// </summary>
         /// <returns>View Angles (Vector2).</returns>
         public Vector2 GetViewAngles() =>
-            Memory.ReadValue<Vector2>(this.RotationAddress, false);
+            Memory.ReadValue<Vector2>(RotationAddress, false);
 
         /// <summary>
         /// Checks if LocalPlayer is Aiming (ADS).
@@ -123,7 +123,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         {
             try
             {
-                return Memory.ReadValue<bool>(this.PWA + Offsets.ProceduralWeaponAnimation._isAiming, false);
+                return Memory.ReadValue<bool>(PWA + Offsets.ProceduralWeaponAnimation._isAiming, false);
             }
             catch (Exception ex)
             {

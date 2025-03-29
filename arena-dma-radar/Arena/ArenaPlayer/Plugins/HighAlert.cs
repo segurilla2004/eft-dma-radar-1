@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Misc;
+﻿using Common.Misc;
+using Common.Players;
+using Common.Unity;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.Misc;
 
-namespace arena_dma_radar.Arena.ArenaPlayer.Plugins
+namespace LonesArenaRadar.Arena.ArenaPlayer.Plugins
 {
     /// <summary>
     /// Contains 'High Alert' Feature Code.

@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Features
+﻿namespace Common.Features
 {
     public interface IMemPatchFeature : IFeature
     {

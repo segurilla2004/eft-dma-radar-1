@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 
-namespace eft_dma_radar.UI.Misc
+namespace LonesEFTRadar.UI.Misc
 {
     internal static class SKPaints
     {

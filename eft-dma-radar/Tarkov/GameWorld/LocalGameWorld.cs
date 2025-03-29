@@ -1,17 +1,17 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.GameWorld.Exits;
-using eft_dma_radar.Tarkov.GameWorld.Explosives;
-using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_shared.Common.Misc.Data;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.Tarkov.GameWorld.Exits;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.Tarkov.GameWorld.Explosives;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using Common.Unity;
+using Common.Features;
+using Common.DMA;
+using Common.Misc;
+using Common.Misc.Data;
+using Common.DMA.ScatterAPI;
 
-namespace eft_dma_radar.Tarkov.GameWorld
+namespace LonesEFTRadar.Tarkov.GameWorld
 {
     /// <summary>
     /// Class containing Game (Raid) instance.
@@ -282,7 +282,7 @@ namespace eft_dma_radar.Tarkov.GameWorld
                         return true;
                     try
                     {
-                        if (this.CameraManager is CameraManager cm)
+                        if (CameraManager is CameraManager cm)
                         {
                             cm.FPSCamera.ThrowIfInvalidVirtualAddress();
                             // If we can get the camera but the screen name is MatchmakerFinalCountdown the raid hasn't fully begun yet
@@ -332,7 +332,7 @@ namespace eft_dma_radar.Tarkov.GameWorld
                 LoneLogging.WriteLine("Realtime thread starting...");
                 while (InRaid)
                 {
-                    if (Program.Config.RatelimitRealtimeReads || !CameraManagerBase.EspRunning || (MemWriteFeature<Aimbot>.Instance.Enabled && Aimbot.Engaged))
+                    if (Program.Config.RatelimitRealtimeReads || !CameraManagerBase.EspRunning || MemWriteFeature<Aimbot>.Instance.Enabled && Aimbot.Engaged)
                         _refreshWait.AutoWait(TimeSpan.FromMilliseconds(1), 1000);
                     ct.ThrowIfCancellationRequested();
                     RealtimeLoop(); // Realtime update loop (player positions, etc.)

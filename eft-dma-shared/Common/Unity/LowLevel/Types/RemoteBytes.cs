@@ -1,8 +1,8 @@
-﻿using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity.LowLevel.Hooks;
+﻿using Common.DMA;
+using Common.Misc;
+using Common.Unity.LowLevel.Hooks;
 
-namespace eft_dma_shared.Common.Unity.LowLevel.Types
+namespace Common.Unity.LowLevel.Types
 {
     public sealed class RemoteBytes : IDisposable
     {

@@ -1,7 +1,8 @@
-﻿using eft_dma_radar.Tarkov.API;
-using eft_dma_shared.Common.Misc.Data;
+﻿using Common.Misc.Data;
+using LonesEFTRadar.Tarkov.API;
+using LonesEFTRadar.Tarkov.EFTPlayer;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
+namespace LonesEFTRadar.Tarkov.EFTPlayer.Plugins
 {
     public sealed class PlayerProfile
     {
@@ -14,7 +15,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
         /// <summary>
         /// Player's Nickname (via Profile Data).
         /// </summary>
-        public string Nickname => this.Profile?.Info?.Nickname;
+        public string Nickname => Profile?.Info?.Nickname;
 
         /// <summary>
         /// Player's current profile (if Profile Lookups are enabled).
@@ -53,7 +54,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
                     {
                         if (deaths == 0)
                             return _overallKD = kills;
-                        return _overallKD = (float)kills / (float)deaths;
+                        return _overallKD = kills / (float)deaths;
                     }
                 }
                 return null;
@@ -105,7 +106,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
                     {
                         if (raidCount == 0)
                             return _survivedRate = 0f;
-                        return _survivedRate = ((float)survived / (float)raidCount) * 100f;
+                        return _survivedRate = survived / (float)raidCount * 100f;
                     }
                 }
                 return null;
@@ -126,7 +127,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
                 if (counters is not null && counters.TotalInGameTime != default)
                 {
                     const float hoursFactor = 3600f; // Divide in-game time by this to get the total hours
-                    return _hours = (int)Math.Round((float)counters.TotalInGameTime / hoursFactor);
+                    return _hours = (int)Math.Round(counters.TotalInGameTime / hoursFactor);
                 }
                 return null;
             }
@@ -177,7 +178,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
         {
             get
             {
-                var mcObj = this.MemberCategory;
+                var mcObj = MemberCategory;
                 if (mcObj is Enums.EMemberCategory mc &&
                     (mc & Enums.EMemberCategory.UniqueId) == Enums.EMemberCategory.UniqueId)
                     return true;
@@ -192,7 +193,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
         {
             get
             {
-                var mcObj = this.MemberCategory;
+                var mcObj = MemberCategory;
                 if (mcObj is Enums.EMemberCategory mc &&
                     (mc & Enums.EMemberCategory.Unheard) == Enums.EMemberCategory.Unheard)
                     return true;

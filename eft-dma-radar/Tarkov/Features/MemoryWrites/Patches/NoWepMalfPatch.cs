@@ -1,8 +1,8 @@
-﻿using eft_dma_radar.Tarkov.Features;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Features;
+using Common.Unity;
+using LonesEFTRadar.Tarkov.Features;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites.Patches
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites.Patches
 {
     public sealed class NoWepMalfPatch : MemPatchFeature<NoWepMalfPatch>
     {

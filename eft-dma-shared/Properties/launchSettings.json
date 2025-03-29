@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "eft-dma-shared": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\segu\\Desktop\\EFT-DMA-Radar-v2-main",
+      "jsWebView2Debugging": true
+    }
+  }
+}

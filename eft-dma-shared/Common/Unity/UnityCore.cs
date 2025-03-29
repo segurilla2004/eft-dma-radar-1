@@ -1,11 +1,11 @@
-﻿using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc.Pools;
+using eft_dma_shared.Common.DMA;
 using SkiaSharp;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     /// <summary>
     /// Unity Game Object Manager. Contains all Game Objects.
@@ -117,7 +117,7 @@ namespace eft_dma_shared.Common.Unity
         public static ulong GetComponent(ulong behaviour, string className)
         {
             var go = Memory.ReadPtr(behaviour + GameObjectOffset);
-            return eft_dma_shared.Common.Unity.GameObject.GetComponent(go, className);
+            return Unity.GameObject.GetComponent(go, className);
         }
     }
 

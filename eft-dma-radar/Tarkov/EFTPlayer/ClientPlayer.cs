@@ -1,10 +1,10 @@
-﻿using eft_dma_radar.Tarkov.Features.MemoryWrites.Patches;
-using eft_dma_shared.Common.Features;
+﻿using Common.Features;
+using Common.Players;
+using Common.Unity;
 using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites.Patches;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer
+namespace LonesEFTRadar.Tarkov.EFTPlayer
 {
     public class ClientPlayer : Player
     {
@@ -89,7 +89,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             MovementContext = GetMovementContext();
             RotationAddress = ValidateRotationAddr(MovementContext + Offsets.MovementContext._rotation);
             /// Setup Transforms
-            this.Skeleton = new Skeleton(this, GetTransformInternalChain);
+            Skeleton = new Skeleton(this, GetTransformInternalChain);
             /// Determine Player Type
             PlayerSide = (Enums.EPlayerSide)Memory.ReadValue<int>(Info + Offsets.PlayerInfo.Side); // Usec,Bear,Scav,etc.
             if (!Enum.IsDefined(PlayerSide)) // Make sure PlayerSide is valid
@@ -107,7 +107,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     {
                         var settings = Memory.ReadPtr(Info + Offsets.PlayerInfo.Settings);
                         var wildSpawnType = (Enums.WildSpawnType)Memory.ReadValueEnsure<int>(settings + Offsets.PlayerInfoSettings.Role);
-                        var role = Player.GetAIRoleInfo(wildSpawnType);
+                        var role = GetAIRoleInfo(wildSpawnType);
                         Name = role.Name;
                         Type = role.Type;
                     }

@@ -1,15 +1,17 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+﻿using Common.Maps;
+using Common.Misc;
+using Common.Misc.Data;
+using Common.Players;
+using Common.Unity;
+using Common.Unity.Collections;
 using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.UI.Radar;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Exits
+namespace LonesEFTRadar.Tarkov.GameWorld.Exits
 {
     public sealed class Exfil : IExitPoint, IWorldEntity, IMapEntity, IMouseoverEntity, IESPEntity
     {

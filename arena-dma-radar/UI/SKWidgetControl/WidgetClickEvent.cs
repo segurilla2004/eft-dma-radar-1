@@ -1,4 +1,4 @@
-﻿namespace arena_dma_radar.UI.SKWidgetControl
+﻿namespace LonesArenaRadar.UI.SKWidgetControl
 {
     public enum WidgetClickEvent
     {

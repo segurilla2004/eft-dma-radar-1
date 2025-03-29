@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
+﻿namespace Common.Misc.Data.TarkovMarket
 {
     internal static class FleaTax
     {

@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     /// <summary>
     /// Contains multiple map parameters used by the GUI.

@@ -1,13 +1,13 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.Features;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc.Config;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel;
+﻿using LonesEFTRadar.Tarkov.Features;
+using LonesEFTRadar.Tarkov.GameWorld;
+using Common.Features;
+using Common.Unity.LowLevel;
+using Common.Misc.Config;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class Chams : MemWriteFeature<Chams>
     {

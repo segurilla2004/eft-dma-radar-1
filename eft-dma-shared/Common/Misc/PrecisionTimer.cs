@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Intrinsics.X86;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     /// <summary>
     /// Provides a High Precision Timer mechanism that resolves to 100-nanosecond periods.

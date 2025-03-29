@@ -1,16 +1,16 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.API;
-using eft_dma_radar.Tarkov.EFTPlayer.Plugins;
-using eft_dma_radar.Tarkov.Features.MemoryWrites.Patches;
+﻿using eft_dma_radar.Tarkov.API;
 using eft_dma_radar.UI.ESP;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
 using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
 using static SDK.Enums;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites.Patches;
+using LonesEFTRadar.Tarkov.EFTPlayer.Plugins;
+using Common.Features;
+using Common.Players;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
+using Common.Unity;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer
+namespace LonesEFTRadar.Tarkov.EFTPlayer
 {
     public class ObservedPlayer : Player
     {
@@ -41,7 +41,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <summary>
         /// Player's Faction.
         /// </summary>
-        public override Enums.EPlayerSide PlayerSide { get; }
+        public override EPlayerSide PlayerSide { get; }
         /// <summary>
         /// Player is Human-Controlled.
         /// </summary>
@@ -77,7 +77,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <summary>
         /// Player's Current Health Status
         /// </summary>
-        public Enums.ETagStatus HealthStatus { get; private set; } = Enums.ETagStatus.Healthy;
+        public ETagStatus HealthStatus { get; private set; } = ETagStatus.Healthy;
 
         internal ObservedPlayer(ulong playerBase) : base(playerBase)
         {
@@ -100,9 +100,9 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             MovementContext = GetMovementContext();
             RotationAddress = ValidateRotationAddr(MovementContext + Offsets.ObservedMovementController.Rotation);
             /// Setup Transforms
-            this.Skeleton = new Skeleton(this, GetTransformInternalChain);
+            Skeleton = new Skeleton(this, GetTransformInternalChain);
             /// Determine Player Type
-            PlayerSide = (Enums.EPlayerSide)Memory.ReadValue<int>(this + Offsets.ObservedPlayerView.Side); // Usec,Bear,Scav,etc.
+            PlayerSide = (EPlayerSide)Memory.ReadValue<int>(this + Offsets.ObservedPlayerView.Side); // Usec,Bear,Scav,etc.
             if (!Enum.IsDefined(PlayerSide)) // Make sure PlayerSide is valid
                 throw new Exception("Invalid Player Side/Faction!");
 
@@ -116,8 +116,8 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     if (MemPatchFeature<FixWildSpawnType>.Instance.IsApplied)
                     {
                         ulong infoContainer = Memory.ReadPtr(ObservedPlayerController + Offsets.ObservedPlayerController.InfoContainer);
-                        var wildSpawnType = (Enums.WildSpawnType)Memory.ReadValueEnsure<int>(infoContainer + Offsets.InfoContainer.Side);
-                        var role = Player.GetAIRoleInfo(wildSpawnType);
+                        var wildSpawnType = (WildSpawnType)Memory.ReadValueEnsure<int>(infoContainer + Offsets.InfoContainer.Side);
+                        var role = GetAIRoleInfo(wildSpawnType);
                         Name = role.Name;
                         Type = role.Type;
                     }
@@ -125,7 +125,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     {
                         var voicePtr = Memory.ReadPtr(this + Offsets.ObservedPlayerView.Voice);
                         string voice = Memory.ReadUnityString(voicePtr);
-                        var role = Player.GetAIRoleInfo(voice);
+                        var role = GetAIRoleInfo(voice);
                         Name = role.Name;
                         Type = role.Type;
                     }
@@ -222,9 +222,9 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             try
             {
                 string nickname = Profile?.Nickname;
-                if (nickname is not null && this.Name != nickname)
+                if (nickname is not null && Name != nickname)
                 {
-                    this.Name = nickname;
+                    Name = nickname;
                     //_ = RunTwitchLookupAsync(nickname);
                 }
             }
@@ -242,25 +242,25 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 if (!_mcSet)
                 {
                     var mcObj = Profile?.MemberCategory;
-                    if (mcObj is Enums.EMemberCategory memberCategory)
+                    if (mcObj is EMemberCategory memberCategory)
                     {
                         string alert = null;
-                        if ((memberCategory & Enums.EMemberCategory.Developer) == Enums.EMemberCategory.Developer)
+                        if ((memberCategory & EMemberCategory.Developer) == EMemberCategory.Developer)
                         {
                             alert = "Developer Account";
                             Type = PlayerType.SpecialPlayer;
                         }
-                        else if ((memberCategory & Enums.EMemberCategory.Sherpa) == Enums.EMemberCategory.Sherpa)
+                        else if ((memberCategory & EMemberCategory.Sherpa) == EMemberCategory.Sherpa)
                         {
                             alert = "Sherpa Account";
                             Type = PlayerType.SpecialPlayer;
                         }
-                        else if ((memberCategory & Enums.EMemberCategory.Emissary) == Enums.EMemberCategory.Emissary)
+                        else if ((memberCategory & EMemberCategory.Emissary) == EMemberCategory.Emissary)
                         {
                             alert = "Emissary Account";
                             Type = PlayerType.SpecialPlayer;
                         }
-                        this.UpdateAlerts(alert);
+                        UpdateAlerts(alert);
                         _mcSet = true;
                     }
                 }
@@ -279,15 +279,15 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         {
             try
             {
-                var tag = (Enums.ETagStatus)Memory.ReadValue<int>(ObservedHealthController + Offsets.ObservedHealthController.HealthStatus);
-                if ((tag & Enums.ETagStatus.Dying) == Enums.ETagStatus.Dying)
-                    HealthStatus = Enums.ETagStatus.Dying;
-                else if ((tag & Enums.ETagStatus.BadlyInjured) == Enums.ETagStatus.BadlyInjured)
-                    HealthStatus = Enums.ETagStatus.BadlyInjured;
-                else if ((tag & Enums.ETagStatus.Injured) == Enums.ETagStatus.Injured)
-                    HealthStatus = Enums.ETagStatus.Injured;
+                var tag = (ETagStatus)Memory.ReadValue<int>(ObservedHealthController + Offsets.ObservedHealthController.HealthStatus);
+                if ((tag & ETagStatus.Dying) == ETagStatus.Dying)
+                    HealthStatus = ETagStatus.Dying;
+                else if ((tag & ETagStatus.BadlyInjured) == ETagStatus.BadlyInjured)
+                    HealthStatus = ETagStatus.BadlyInjured;
+                else if ((tag & ETagStatus.Injured) == ETagStatus.Injured)
+                    HealthStatus = ETagStatus.Injured;
                 else
-                    HealthStatus = Enums.ETagStatus.Healthy;
+                    HealthStatus = ETagStatus.Healthy;
             }
             catch (Exception ex)
             {

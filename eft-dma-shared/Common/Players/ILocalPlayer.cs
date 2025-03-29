@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Players
+﻿namespace Common.Players
 {
     /// <summary>
     /// Interface defining a player that is the LocalPlayer running this software.

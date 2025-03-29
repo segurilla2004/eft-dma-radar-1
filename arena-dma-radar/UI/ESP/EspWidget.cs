@@ -1,11 +1,12 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.UI.SKWidgetControl;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+﻿using eft_dma_shared.Common.ESP;
+using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.SKWidgetControl;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Unity;
+using Common.Players;
+using Common.Misc;
 
-namespace arena_dma_radar.UI.ESP
+namespace LonesArenaRadar.UI.ESP
 {
     public sealed class EspWidget : SKWidget
     {

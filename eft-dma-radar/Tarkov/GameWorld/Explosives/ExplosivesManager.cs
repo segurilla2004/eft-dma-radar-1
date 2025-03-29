@@ -1,7 +1,8 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using Common.Misc;
+using Common.Unity.Collections;
+using eft_dma_radar.Tarkov.GameWorld.Explosives;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Explosives
+namespace LonesEFTRadar.Tarkov.GameWorld.Explosives
 {
     public sealed class ExplosivesManager : IReadOnlyCollection<IExplosiveItem>
     {

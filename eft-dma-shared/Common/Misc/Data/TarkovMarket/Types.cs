@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
+namespace Common.Misc.Data.TarkovMarket
 {
     public partial class TarkovDevQuery
     {

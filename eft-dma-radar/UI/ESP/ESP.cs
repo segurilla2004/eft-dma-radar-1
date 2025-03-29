@@ -1,6 +1,6 @@
-﻿using eft_dma_radar.UI.Misc;
+﻿using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.UI.ESP
+namespace LonesEFTRadar.UI.ESP
 {
     internal static class ESP
     {

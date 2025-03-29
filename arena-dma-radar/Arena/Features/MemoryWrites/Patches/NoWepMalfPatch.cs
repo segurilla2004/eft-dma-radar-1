@@ -1,8 +1,7 @@
-﻿using arena_dma_radar.Arena.Features;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Features;
+using Common.Unity;
 
-namespace arena_dma_radar.Arena.Features.MemoryWrites.Patches
+namespace LonesArenaRadar.Arena.Features.MemoryWrites.Patches
 {
     public sealed class NoWepMalfPatch : MemPatchFeature<NoWepMalfPatch>
     {

@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer.Plugins;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Misc;
+﻿using LonesArenaRadar.Arena.ArenaPlayer.Plugins;
+using Common.Players;
+using Common.DMA;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.ArenaPlayer
+namespace LonesArenaRadar.Arena.ArenaPlayer
 {
     public sealed class LocalPlayer : ArenaClientPlayer, ILocalPlayer
     {
@@ -26,7 +26,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                 throw new ArgumentOutOfRangeException(nameof(classType));
             IsHuman = true;
             Name = "localPlayer";
-            this.Firearm = new(this);
+            Firearm = new(this);
             ulong id = ulong.Parse(AccountID);
             ILocalPlayer.AccountId = id;
         }
@@ -37,7 +37,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// <param name="index"></param>
         public override void OnRealtimeLoop(ScatterReadIndex index)
         {
-            index.AddEntry<MemPointer>(-11, this.HandsControllerAddr);
+            index.AddEntry<MemPointer>(-11, HandsControllerAddr);
             index.Callbacks += x1 =>
             {
                 if (x1.TryGetResult<MemPointer>(-11, out var handsController))
@@ -52,7 +52,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// </summary>
         /// <returns>View Angles (Vector2).</returns>
         public Vector2 GetViewAngles() =>
-            Memory.ReadValue<Vector2>(this.RotationAddress, false);
+            Memory.ReadValue<Vector2>(RotationAddress, false);
 
         /// <summary>
         /// Checks if LocalPlayer is Aiming (ADS).
@@ -62,7 +62,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         {
             try
             {
-                return Memory.ReadValue<bool>(this.PWA + Offsets.ProceduralWeaponAnimation._isAiming, false);
+                return Memory.ReadValue<bool>(PWA + Offsets.ProceduralWeaponAnimation._isAiming, false);
             }
             catch (Exception ex)
             {

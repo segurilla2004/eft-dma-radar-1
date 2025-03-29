@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     /// <summary>
     /// Defines an Entity that has a 3D GameWorld Position.

@@ -1,12 +1,13 @@
-﻿using arena_dma_radar.Arena.GameWorld;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel;
-using eft_dma_shared.Common.Misc.Config;
+﻿using LonesArenaRadar.Arena.Features;
+using LonesArenaRadar.Arena.GameWorld;
+using Common.Features;
+using Common.Unity.LowLevel;
+using Common.Misc.Config;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.Features.MemoryWrites
+namespace LonesArenaRadar.Arena.Features.MemoryWrites
 {
     public sealed class Chams : MemWriteFeature<Chams>
     {

@@ -1,9 +1,9 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 using System.Collections.Frozen;
 using System.IO.Compression;
 using System.Text.Json;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     /// <summary>
     /// Maintains Map Resources for this application.

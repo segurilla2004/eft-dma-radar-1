@@ -1,17 +1,19 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.Arena.ArenaPlayer.Plugins;
-using arena_dma_radar.Arena.GameWorld;
-using arena_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Ballistics;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Players;
+﻿using eft_dma_shared.Common.ESP;
+using LonesArenaRadar.Arena.Features;
+using LonesArenaRadar;
+using LonesArenaRadar.Arena.ArenaPlayer.Plugins;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using LonesArenaRadar.UI.Misc;
+using LonesArenaRadar.Arena.GameWorld;
+using Common.Unity;
+using Common.Features;
+using Common.Unity.Collections;
+using Common.Ballistics;
+using Common.Players;
+using Common.DMA;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.Features.MemoryWrites
+namespace LonesArenaRadar.Arena.Features.MemoryWrites
 {
     public sealed class Aimbot : MemWriteFeature<Aimbot>
     {
@@ -412,7 +414,7 @@ namespace arena_dma_radar.Arena.Features.MemoryWrites
                         float velMod = 0f;
                         velMod += Memory.ReadValue<float>(Cache.ItemTemplate + Offsets.WeaponTemplate.Velocity);
                         RecurseWeaponAttachVelocity(Cache.ItemBase, ref velMod); // Expensive operation
-                        velMod = 1f + (velMod / 100f); // Get percentage (the game will give us 15.00, we want to turn it into 1.15)
+                        velMod = 1f + velMod / 100f; // Get percentage (the game will give us 15.00, we want to turn it into 1.15)
                         // Integrity check -> Should be between 0.01 and 1.99
                         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(velMod, 0d, nameof(velMod));
                         ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(velMod, 2d, nameof(velMod));

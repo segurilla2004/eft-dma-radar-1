@@ -1,7 +1,7 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
 
-namespace eft_dma_radar.UI.ESP
+namespace LonesEFTRadar.UI.ESP
 {
     /// <summary>
     /// Defines an entity that can be drawn on Fuser ESP.

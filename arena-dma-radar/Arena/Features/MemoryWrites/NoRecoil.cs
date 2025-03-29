@@ -1,10 +1,9 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.Arena.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
+﻿using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Features;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.Features.MemoryWrites
+namespace LonesArenaRadar.Arena.Features.MemoryWrites
 {
     public sealed class NoRecoil : MemWriteFeature<NoRecoil>
     {

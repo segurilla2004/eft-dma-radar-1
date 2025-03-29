@@ -1,9 +1,9 @@
 ﻿using eft_dma_shared.Misc;
 using System.Diagnostics;
-using eft_dma_shared.Common.Misc.Config;
-using eft_dma_shared.Common.Misc;
 using System.Net.Http.Headers;
 using System.Net;
+using Common.Misc.Config;
+using Common.Misc;
 
 namespace eft_dma_shared
 {

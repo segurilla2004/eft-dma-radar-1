@@ -1,15 +1,16 @@
 ﻿using System.Collections.Frozen;
-using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.LootFilters;
 using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Misc.Data;
 using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.LootFilters;
+using Common.Unity.Collections;
+using Common.DMA;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
+using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     public sealed class LootManager
     {
@@ -57,7 +58,7 @@ namespace eft_dma_radar.Tarkov.Loot
                     var filter = LootFilter.Create();
                     FilteredLoot = UnfilteredLoot?
                         .Where(x => filter(x))
-                        .OrderByDescending(x => x.Important || (MainForm.Config.QuestHelper.Enabled && x.IsQuestCondition))
+                        .OrderByDescending(x => x.Important || MainForm.Config.QuestHelper.Enabled && x.IsQuestCondition)
                         .ThenByDescending(x => x?.Price ?? 0)
                         .ToList();
                 }
@@ -173,8 +174,8 @@ namespace eft_dma_radar.Tarkov.Loot
             }
 
             map.Execute(); // execute scatter read
-            this.UnfilteredLoot = loot;
-            this.StaticLootContainers = containers;
+            UnfilteredLoot = loot;
+            StaticLootContainers = containers;
         }
 
         /// <summary>

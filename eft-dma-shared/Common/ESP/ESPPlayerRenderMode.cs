@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.ESP
+﻿namespace Common.ESP
 {
     public enum ESPPlayerRenderMode : int
     {

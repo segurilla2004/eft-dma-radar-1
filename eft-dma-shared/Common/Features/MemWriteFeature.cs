@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.DMA.ScatterAPI;
+﻿using Common.DMA.ScatterAPI;
 using System.Diagnostics;
 
-namespace eft_dma_shared.Common.Features
+namespace Common.Features
 {
     public abstract class MemWriteFeature<T> : IFeature, IMemWriteFeature
         where T : IMemWriteFeature

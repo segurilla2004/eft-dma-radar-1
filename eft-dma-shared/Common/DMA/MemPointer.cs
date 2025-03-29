@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.DMA
+namespace Common.DMA
 {
     /// <summary>
     /// Represents a 64-Bit Unsigned Pointer Address.

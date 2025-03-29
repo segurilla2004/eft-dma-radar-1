@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.Text.Json;
 
-namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
+namespace Common.Misc.Data.TarkovMarket
 {
     public static class TarkovMarketJob
     {

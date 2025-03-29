@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Ballistics
+﻿namespace Common.Ballistics
 {
     public readonly ref struct BallisticSimulationOutput
     {

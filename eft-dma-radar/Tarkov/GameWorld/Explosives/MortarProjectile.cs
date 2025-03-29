@@ -1,13 +1,13 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+﻿using Common.Maps;
+using Common.Players;
+using Common.Unity;
 using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Explosives
+namespace LonesEFTRadar.Tarkov.GameWorld.Explosives
 {
     public sealed class MortarProjectile : IExplosiveItem
     {
@@ -17,9 +17,9 @@ namespace eft_dma_radar.Tarkov.GameWorld.Explosives
         public MortarProjectile(ulong baseAddr, ConcurrentDictionary<ulong, IExplosiveItem> parent)
         {
             _parent = parent;
-            this.Addr = baseAddr;
-            this.Refresh();
-            if (!this.IsActive)
+            Addr = baseAddr;
+            Refresh();
+            if (!IsActive)
             {
                 throw new Exception("Already exploded!");
             }
@@ -56,8 +56,8 @@ namespace eft_dma_radar.Tarkov.GameWorld.Explosives
         public void Refresh()
         {
             var artilleryProjectile = Memory.ReadValue<ArtilleryProjectile>(this, false);
-            this.IsActive = artilleryProjectile.IsActive;
-            if (this.IsActive)
+            IsActive = artilleryProjectile.IsActive;
+            if (IsActive)
             {
                 _position = artilleryProjectile.Position;
             }

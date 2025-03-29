@@ -1,5 +1,4 @@
-﻿using eft_dma_shared.Common.Misc;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -7,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     public static class Utils
     {

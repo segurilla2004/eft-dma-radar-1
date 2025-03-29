@@ -1,4 +1,6 @@
-﻿namespace arena_dma_radar.UI.ColorPicker
+﻿using LonesArenaRadar.UI.ColorPicker;
+
+namespace arena_dma_radar.UI.ColorPicker
 {
     sealed partial class ColorPicker<TEnum, TClass>
         where TEnum : Enum

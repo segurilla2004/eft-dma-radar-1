@@ -1,9 +1,10 @@
-﻿using DarkModeForms;
+﻿using Common.Misc;
+using Common.Unity;
+using DarkModeForms;
 using eft_dma_radar.Tarkov;
-using eft_dma_radar.UI.Misc;
 using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.Misc;
 
 namespace eft_dma_radar.UI.Hotkeys
 {

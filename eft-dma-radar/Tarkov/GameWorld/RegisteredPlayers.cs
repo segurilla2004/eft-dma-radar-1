@@ -1,9 +1,9 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using LonesEFTRadar.Tarkov.EFTPlayer;
+using Common.Unity.Collections;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.GameWorld
+namespace LonesEFTRadar.Tarkov.GameWorld
 {
     public sealed class RegisteredPlayers : IReadOnlyCollection<Player>
     {

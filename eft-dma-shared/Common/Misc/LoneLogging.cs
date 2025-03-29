@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     public static class LoneLogging
     {

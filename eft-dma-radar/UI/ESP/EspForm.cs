@@ -1,18 +1,19 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.Features;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_radar.Tarkov.GameWorld.Exits;
-using eft_dma_radar.Tarkov.GameWorld.Explosives;
-using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.Misc;
+﻿using eft_dma_radar.Tarkov;
 using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc.Data;
 using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.GameWorld.Exits;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.Tarkov.Features;
+using LonesEFTRadar.Tarkov.GameWorld.Explosives;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using LonesEFTRadar;
+using Common.Misc;
+using Common.Unity;
+using Common.Features;
+using Common.Misc.Data;
 
 namespace eft_dma_radar.UI.ESP
 {

@@ -1,8 +1,8 @@
-﻿using eft_dma_shared.Common.Unity.LowLevel;
+﻿using Common.Unity.LowLevel;
 using SkiaSharp;
 using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Misc.Config
+namespace Common.Misc.Config
 {
     public sealed class ChamsConfig
     {

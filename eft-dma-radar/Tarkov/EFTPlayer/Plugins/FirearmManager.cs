@@ -1,15 +1,17 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
+﻿using eft_dma_radar.UI.ESP;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Misc.Pools;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.Misc;
+using Common.Unity.Collections;
+using Common.Misc;
+using Common.Unity;
+using Common.Misc.Pools;
+using Common.Players;
+using Common.DMA.ScatterAPI;
+using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
+namespace LonesEFTRadar.Tarkov.EFTPlayer.Plugins
 {
     public sealed class FirearmManager
     {

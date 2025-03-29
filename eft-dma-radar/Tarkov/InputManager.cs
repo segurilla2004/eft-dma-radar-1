@@ -1,10 +1,10 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.UI.Hotkeys;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
+﻿using eft_dma_radar.UI.Hotkeys;
+using Common.DMA;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov
+namespace LonesEFTRadar.Tarkov
 {
     internal static class InputManager
     {
@@ -103,12 +103,12 @@ namespace eft_dma_radar.Tarkov
                 if (x1.TryGetResult<MemPointer>(0, out var v10))
                 {
                     uint v11 = v3 & 0x1F;
-                    idx2.AddEntry<uint>(0, v10 + (v6 * 0x4)); // v10[v6] = Result
+                    idx2.AddEntry<uint>(0, v10 + v6 * 0x4); // v10[v6] = Result
                     idx2.Callbacks += x2 =>
                     {
                         if (x2.TryGetResult<uint>(0, out var v12))
                         {
-                            bool isKeyDown = (v12 & (1u << (int)v11)) != 0;
+                            bool isKeyDown = (v12 & 1u << (int)v11) != 0;
                             action.Execute(isKeyDown);
                         }
                     };

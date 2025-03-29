@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.DMA
+﻿namespace Common.DMA
 {
     /// <summary>
     /// FPGA Read Algorithm

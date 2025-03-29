@@ -1,13 +1,13 @@
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+using Common.Maps;
+using Common.Players;
+using Common.Unity;
 using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Explosives
+namespace LonesEFTRadar.Tarkov.GameWorld.Explosives
 {
     /// <summary>
     /// Represents a 'Hot' grenade in Local Game World.
@@ -62,7 +62,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Explosives
         /// </summary>
         public void Refresh()
         {
-            if (!this.IsActive)
+            if (!IsActive)
             {
                 return;
             }

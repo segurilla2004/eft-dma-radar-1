@@ -1,7 +1,7 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using eft_dma_shared.Common.Maps;
+﻿using Common.Maps;
+using LonesArenaRadar.Arena.ArenaPlayer;
 
-namespace arena_dma_radar.UI.Radar
+namespace LonesArenaRadar.UI.Radar
 {
     /// <summary>
     /// Defines a Radar Map Mouseover Entity.

@@ -1,14 +1,15 @@
 ﻿using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Misc.Pools;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+using LonesArenaRadar;
+using LonesArenaRadar.UI.Misc;
+using Common.Unity.Collections;
+using Common.Misc;
+using Common.Unity;
+using Common.Misc.Pools;
+using Common.DMA.ScatterAPI;
+using Common.Misc.Data;
 
-namespace arena_dma_radar.Arena.ArenaPlayer.Plugins
+namespace LonesArenaRadar.Arena.ArenaPlayer.Plugins
 {
     public sealed class FirearmManager
     {

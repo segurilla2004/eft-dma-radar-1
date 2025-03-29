@@ -1,7 +1,7 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Unity;
+using LonesArenaRadar.Arena.ArenaPlayer;
 
-namespace arena_dma_radar.UI.ESP
+namespace LonesArenaRadar.UI.ESP
 {
     /// <summary>
     /// Defines an entity that can be drawn on Fuser ESP.

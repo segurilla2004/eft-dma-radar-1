@@ -1,12 +1,13 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.Radar;
-using eft_dma_radar.UI.SKWidgetControl;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.SKWidgetControl;
+using LonesEFTRadar.Tarkov.Loot;
+using Common.Unity;
+using Common.Misc;
+using Common.Players;
 
-namespace eft_dma_radar.UI.ESP
+namespace LonesEFTRadar.UI.ESP
 {
     public sealed class EspWidget : SKWidget
     {

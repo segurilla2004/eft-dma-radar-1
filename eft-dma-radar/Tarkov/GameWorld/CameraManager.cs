@@ -1,11 +1,11 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_radar.Tarkov.EFTPlayer;
+﻿using LonesEFTRadar.Tarkov.EFTPlayer;
+using Common.Unity.Collections;
+using Common.Unity;
+using Common.DMA;
+using Common.Misc;
+using Common.DMA.ScatterAPI;
 
-namespace eft_dma_radar.Tarkov.GameWorld
+namespace LonesEFTRadar.Tarkov.GameWorld
 {
     public sealed class CameraManager : CameraManagerBase
     {

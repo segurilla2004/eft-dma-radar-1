@@ -1,25 +1,26 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer.SpecialCollections;
-using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Radar;
-using eft_dma_radar.UI.Misc;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_radar.Tarkov.EFTPlayer.Plugins;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.Unity.LowLevel;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Maps;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Misc.Pools;
-using eft_dma_shared.Common.DMA;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.UI.Radar;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.Tarkov.GameWorld;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.Tarkov.EFTPlayer.Plugins;
+using LonesEFTRadar.Tarkov.EFTPlayer.SpecialCollections;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using Common.Unity;
+using Common.Unity.Collections;
+using Common.Features;
+using Common.Unity.LowLevel;
+using Common.ESP;
+using Common.Maps;
+using Common.Players;
+using Common.Misc.Pools;
+using Common.Misc;
+using Common.DMA;
+using Common.DMA.ScatterAPI;
+using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer
+namespace LonesEFTRadar.Tarkov.EFTPlayer
 {
     /// <summary>
     /// Base class for Tarkov Players.
@@ -411,10 +412,10 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 return;
             lock (_alertsLock)
             {
-                if (this.Alerts is null)
-                    this.Alerts = alert;
+                if (Alerts is null)
+                    Alerts = alert;
                 else
-                    this.Alerts = $"{alert} | {this.Alerts}";
+                    Alerts = $"{alert} | {Alerts}";
             }
         }
 
@@ -446,17 +447,17 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 isActive = registered.Contains(this);
             if (isActive)
             {
-                this.SetAlive();
+                SetAlive();
             }
-            else if (this.IsAlive) // Not in list, but alive
+            else if (IsAlive) // Not in list, but alive
             {
-                index.AddEntry<ulong>(0, this.CorpseAddr);
+                index.AddEntry<ulong>(0, CorpseAddr);
                 index.Callbacks += x1 =>
                 {
                     if (x1.TryGetResult<ulong>(0, out var corpsePtr) && corpsePtr != 0x0)
-                        this.SetDead(corpsePtr);
+                        SetDead(corpsePtr);
                     else
-                        this.SetExfild();
+                        SetExfild();
                 };
             }
         }
@@ -496,7 +497,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <param name="index">Scatter read index dedicated to this player.</param>
         public virtual void OnRealtimeLoop(ScatterReadIndex index)
         {
-            index.AddEntry<Vector2>(-1, this.RotationAddress); // Rotation
+            index.AddEntry<Vector2>(-1, RotationAddress); // Rotation
             foreach (var tr in Skeleton.Bones)
             {
                 index.AddEntry<SharedArray<UnityTransform.TrsX>>((int)(uint)tr.Key, tr.Value.VerticesAddr,
@@ -508,7 +509,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 bool p1 = false;
                 bool p2 = true;
                 if (x1.TryGetResult<Vector2>(-1, out var rotation))
-                    p1 = this.SetRotation(ref rotation);
+                    p1 = SetRotation(ref rotation);
                 foreach (var tr in Skeleton.Bones)
                 {
                     if (x1.TryGetResult<SharedArray<UnityTransform.TrsX>>((int)(uint)tr.Key, out var vertices))
@@ -521,8 +522,8 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                             }
                             catch (Exception ex) // Attempt to re-allocate Transform on error
                             {
-                                LoneLogging.WriteLine($"ERROR getting Player '{this.Name}' {tr.Key} Position: {ex}");
-                                this.Skeleton.ResetTransform(tr.Key);
+                                LoneLogging.WriteLine($"ERROR getting Player '{Name}' {tr.Key} Position: {ex}");
+                                Skeleton.ResetTransform(tr.Key);
                             }
                         }
                         catch
@@ -537,9 +538,9 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 }
 
                 if (p1 && p2)
-                    this.ErrorTimer.Reset();
+                    ErrorTimer.Reset();
                 else
-                    this.ErrorTimer.Start();
+                    ErrorTimer.Start();
             };
         }
 
@@ -566,8 +567,8 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                             if (tr.Value.VerticesAddr != verticesPtr) // check if any addr changed
                             {
                                 LoneLogging.WriteLine(
-                                    $"WARNING - '{tr.Key}' Transform has changed for Player '{this.Name}'");
-                                this.Skeleton.ResetTransform(tr.Key); // alloc new transform
+                                    $"WARNING - '{tr.Key}' Transform has changed for Player '{Name}'");
+                                Skeleton.ResetTransform(tr.Key); // alloc new transform
                             }
                         }
                     };
@@ -1185,23 +1186,23 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                         Type = PlayerType.AIBoss
                     };
                 case Enums.WildSpawnType.bossTagillaAgro:
-                     return new AIRole()
-                     {
-                         Name = "bossTagillaAgro",
-                         Type = PlayerType.AIBoss
-                     };
-                 case Enums.WildSpawnType.bossKillaAgro:
-                     return new AIRole()
-                     {
-                         Name = "bossKillaAgro",
-                         Type = PlayerType.AIBoss
-                     };
-                 case Enums.WildSpawnType.tagillaHelperAgro:
-                     return new AIRole()
-                     {
-                         Name = "tagillaHelperAgro",
-                         Type = PlayerType.AIBoss
-                     };
+                    return new AIRole()
+                    {
+                        Name = "bossTagillaAgro",
+                        Type = PlayerType.AIBoss
+                    };
+                case Enums.WildSpawnType.bossKillaAgro:
+                    return new AIRole()
+                    {
+                        Name = "bossKillaAgro",
+                        Type = PlayerType.AIBoss
+                    };
+                case Enums.WildSpawnType.tagillaHelperAgro:
+                    return new AIRole()
+                    {
+                        Name = "tagillaHelperAgro",
+                        Type = PlayerType.AIBoss
+                    };
                 default:
                     LoneLogging.WriteLine("WARNING: Unknown WildSpawnType: " + (int)wildSpawnType);
                     return new AIRole()
@@ -1252,7 +1253,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             }
             bool DoWrite()
             {
-                if (Memory.ReadValue<ulong>(this.CorpseAddr, false) != 0)
+                if (Memory.ReadValue<ulong>(CorpseAddr, false) != 0)
                     return false;
                 if (!game.IsSafeToWriteMem)
                     return false;
@@ -1267,7 +1268,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <param name="chamsMaterial"></param>
         private void ApplyClothingChams(ScatterWriteHandle writes, int chamsMaterial)
         {
-            var pRendererContainersArray = Memory.ReadPtr(this.Body + Offsets.PlayerBody._bodyRenderers);
+            var pRendererContainersArray = Memory.ReadPtr(Body + Offsets.PlayerBody._bodyRenderers);
             using var rendererContainersArray = MemArray<Types.BodyRendererContainer>.Get(pRendererContainersArray);
             ArgumentOutOfRangeException.ThrowIfZero(rendererContainersArray.Count);
 
@@ -1292,7 +1293,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <param name="chamsMaterial"></param>
         private void ApplyGearChams(ScatterWriteHandle writes, int chamsMaterial)
         {
-            var slotViews = Memory.ReadValue<ulong>(this.Body + Offsets.PlayerBody.SlotViews);
+            var slotViews = Memory.ReadValue<ulong>(Body + Offsets.PlayerBody.SlotViews);
             if (!Utils.IsValidVirtualAddress(slotViews))
                 return;
 
@@ -1360,7 +1361,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                 return;
             var materialsArrayPtr = Memory.ReadValueEnsure<ulong>(renderer + UnityOffsets.Renderer.Materials);
             materialsArrayPtr.ThrowIfInvalidVirtualAddress();
-            var materials = Enumerable.Repeat<int>(chamsMaterial, materialsCount).ToArray();
+            var materials = Enumerable.Repeat(chamsMaterial, materialsCount).ToArray();
             writes.AddBufferEntry(materialsArrayPtr, materials.AsSpan());
         }
 
@@ -1368,7 +1369,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
 
         #region Interfaces
 
-        public virtual ref Vector3 Position => ref this.Skeleton.Root.Position;
+        public virtual ref Vector3 Position => ref Skeleton.Root.Position;
         public Vector2 MouseoverPosition { get; set; }
 
         public void Draw(SKCanvas canvas, LoneMapParams mapParams, ILocalPlayer localPlayer)
@@ -1417,7 +1418,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
 
                     if (Type is not PlayerType.Teammate
                         && ((Gear?.Loot?.Any(x => x.IsImportant) ?? false) ||
-                            (MainForm.Config.QuestHelper.Enabled && (Gear?.HasQuestItems ?? false))
+                            MainForm.Config.QuestHelper.Enabled && (Gear?.HasQuestItems ?? false)
                         ))
                         lines[0] = $"!!{lines[0]}"; // Notify important loot
                     DrawPlayerText(canvas, point, lines);
@@ -1444,10 +1445,10 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             canvas.DrawCircle(point, size, SKPaints.ShapeOutline); // Draw outline
             canvas.DrawCircle(point, size, paints.Item1); // draw LocalPlayer marker
 
-            var aimlineLength = this == localPlayer || (this.IsFriendly && MainForm.Config.TeammateAimlines) ? 
+            var aimlineLength = this == localPlayer || IsFriendly && MainForm.Config.TeammateAimlines ?
                 MainForm.Config.AimLineLength : 15;
-            if (!IsFriendly && 
-                !(this.IsAI && !MainForm.Config.AIAimlines) &&
+            if (!IsFriendly &&
+                !(IsAI && !MainForm.Config.AIAimlines) &&
                 this.IsFacingTarget(localPlayer, Program.Config.MaxDistance)) // Hostile Player, check if aiming at a friendly (High Alert)
                 aimlineLength = 9999;
 
@@ -1545,7 +1546,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     : $" ({observed.HealthStatus.GetDescription()})"; // Only display abnormal health status
             if (IsStreaming) // Streamer Notice
                 lines.Add("[LIVE TTV - Double Click]");
-            string alert = this.Alerts?.Trim();
+            string alert = Alerts?.Trim();
             if (!string.IsNullOrEmpty(alert)) // Special Players,etc.
                 lines.Add(alert);
             if (IsHostileActive) // Enemy Players, display information
@@ -1614,7 +1615,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             var drawLabel = showInfo || showDist || showWep;
 
             if (IsHostile && (ESP.Config.HighAlertMode is HighAlertMode.AllPlayers ||
-                              (ESP.Config.HighAlertMode is HighAlertMode.HumansOnly && IsHuman))) // Check High Alert
+                              ESP.Config.HighAlertMode is HighAlertMode.HumansOnly && IsHuman)) // Check High Alert
             {
                 if (this.IsFacingTarget(localPlayer))
                 {
@@ -1642,7 +1643,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
 
             if (renderMode is ESPPlayerRenderMode.Bones)
             {
-                if (!this.Skeleton.UpdateESPBuffer())
+                if (!Skeleton.UpdateESPBuffer())
                     return;
                 canvas.DrawPoints(SKPointMode.Lines, Skeleton.ESPBuffer, espPaints.Item1);
             }

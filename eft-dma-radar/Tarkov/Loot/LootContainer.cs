@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc.Data;
+﻿using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     public class LootContainer : LootItem
     {
@@ -12,7 +12,7 @@ namespace eft_dma_radar.Tarkov.Loot
         {
             get
             {
-                var items = this.FilteredLoot;
+                var items = FilteredLoot;
                 if (items is not null && items.Count() == 1)
                     return items.First().Name ?? "Loot";
                 return "Loot";
@@ -25,7 +25,7 @@ namespace eft_dma_radar.Tarkov.Loot
         public LootContainer(IReadOnlyList<LootItem> loot) : base(_defaultItem)
         {
             ArgumentNullException.ThrowIfNull(loot, nameof(loot));
-            this.Loot = loot;
+            Loot = loot;
         }
 
         /// <summary>

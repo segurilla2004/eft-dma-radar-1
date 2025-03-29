@@ -1,12 +1,13 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity.LowLevel.Hooks;
+﻿using Common.Misc;
+using Common.Unity.LowLevel.Hooks;
+using eft_dma_shared;
 using eft_dma_shared.Common.Unity.LowLevel.Types;
 using SkiaSharp;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace eft_dma_shared.Common.Unity.LowLevel
+namespace Common.Unity.LowLevel
 {
     /// <summary>
     /// Unity Chams Manager.

@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Ballistics
+﻿namespace Common.Ballistics
 {
     internal readonly struct G1DragModel
     {

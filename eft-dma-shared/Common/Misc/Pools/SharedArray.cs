@@ -1,7 +1,7 @@
 ﻿using System.Buffers;
 using System.Collections;
 
-namespace eft_dma_shared.Common.Misc.Pools
+namespace Common.Misc.Pools
 {
     /// <summary>
     /// Represents a flexible array buffer that uses the Shared Array Pool.

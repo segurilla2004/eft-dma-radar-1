@@ -1,4 +1,6 @@
-﻿namespace eft_dma_radar.UI.ColorPicker
+﻿using LonesEFTRadar.UI.ColorPicker;
+
+namespace eft_dma_radar.UI.ColorPicker
 {
     sealed partial class ColorPicker<TEnum, TClass>
         where TEnum : Enum

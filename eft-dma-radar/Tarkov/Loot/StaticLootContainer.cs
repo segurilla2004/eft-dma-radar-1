@@ -1,14 +1,14 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+﻿using Common.Maps;
+using Common.Misc.Data;
+using Common.Players;
+using Common.Unity;
 using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     public sealed class StaticLootContainer : LootContainer
     {
@@ -25,11 +25,11 @@ namespace eft_dma_radar.Tarkov.Loot
         public StaticLootContainer(string containerId, bool opened) : base(_defaultLoot)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(containerId, nameof(containerId));
-            this.ID = containerId;
-            this.Searched = opened;
+            ID = containerId;
+            Searched = opened;
             if (EftDataManager.AllContainers.TryGetValue(containerId, out var container))
             {
-                this.Name = container.ShortName ?? "Container";
+                Name = container.ShortName ?? "Container";
             }
         }
 
@@ -78,14 +78,14 @@ namespace eft_dma_radar.Tarkov.Loot
             canvas.DrawRect(boxPt, SKPaints.PaintContainerLootESP);
             var textPt = new SKPoint(scrPos.X,
                 scrPos.Y + 16f * ESP.Config.FontScale);
-            textPt.DrawESPText(canvas, this, localPlayer, showDist, SKPaints.TextContainerLootESP, this.Name);
+            textPt.DrawESPText(canvas, this, localPlayer, showDist, SKPaints.TextContainerLootESP, Name);
         }
 
         public override void DrawMouseover(SKCanvas canvas, LoneMapParams mapParams, LocalPlayer localPlayer)
         {
             var lines = new List<string>()
             {
-                this.Name
+                Name
             };
             Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);
         }

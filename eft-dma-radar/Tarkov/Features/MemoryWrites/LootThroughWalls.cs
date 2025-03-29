@@ -1,11 +1,12 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.Misc;
+using Common.Features;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class LootThroughWalls : MemWriteFeature<LootThroughWalls>
     {
@@ -40,7 +41,7 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                     {
                         LoneLogging.WriteLine("Initializing LTW...");
                         var gw = MonoLib.MonoClass.Find("Assembly-CSharp", "EFT.GameWorld", out _).GetStaticFieldData();
-                        Memory.WriteValueEnsure<int>(gw + 0x14, 0); // LootMaskObstruction
+                        Memory.WriteValueEnsure(gw + 0x14, 0); // LootMaskObstruction
                         var hardSettings = MonoLib.MonoClass.Find("Assembly-CSharp", "EFTHardSettings", out var hardSettingsAddr).GetStaticFieldData();
                         if (hardSettings == 0x0)
                             throw new ArgumentNullException(nameof(hardSettings));

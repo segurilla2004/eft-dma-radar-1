@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Unity.LowLevel.Types
+﻿namespace Common.Unity.LowLevel.Types
 {
     public interface IMonoType
     {

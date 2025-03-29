@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 
-namespace arena_dma_radar.UI.SKWidgetControl
+namespace LonesArenaRadar.UI.SKWidgetControl
 {
     public abstract class SKWidget : IDisposable
     {

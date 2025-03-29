@@ -1,11 +1,12 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using System.Buffers.Binary;
+﻿using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using eft_dma_shared;
+using Common.DMA;
+using Common.Misc;
 
-namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
+namespace Common.Unity.LowLevel.Hooks
 {
     public static class NativeHook
     {
@@ -319,7 +320,7 @@ namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
         {
             try
             {
-                Memory.ReadValueEnsure<ShellCodeData>(CodeCave, out data);
+                Memory.ReadValueEnsure(CodeCave, out data);
                 return true;
             }
             catch

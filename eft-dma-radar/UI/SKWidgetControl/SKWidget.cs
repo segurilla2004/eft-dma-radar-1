@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 
-namespace eft_dma_radar.UI.SKWidgetControl
+namespace LonesEFTRadar.UI.SKWidgetControl
 {
     public abstract class SKWidget : IDisposable
     {
@@ -59,8 +59,8 @@ namespace eft_dma_radar.UI.SKWidgetControl
             {
                 lock (_sync)
                 {
-                    if ((value.X != 0f && !value.X.IsNormalOrZero()) ||
-                        (value.Y != 0f && !value.Y.IsNormalOrZero()))
+                    if (value.X != 0f && !value.X.IsNormalOrZero() ||
+                        value.Y != 0f && !value.Y.IsNormalOrZero())
                         return;
                     var cr = _parent.ClientRectangle;
                     if (cr.Width == 0 ||
@@ -174,7 +174,7 @@ namespace eft_dma_radar.UI.SKWidgetControl
             if (!Minimized)
                 canvas.DrawRect(Rectangle, WidgetBackgroundPaint);
             canvas.DrawRect(TitleBar, TitleBarPaint);
-            float titleCenterY = TitleBar.Top + (TitleBar.Height / 2);
+            float titleCenterY = TitleBar.Top + TitleBar.Height / 2;
             float titleYOffset = (TitleBarText.FontMetrics.Ascent + TitleBarText.FontMetrics.Descent) / 2;
             canvas.DrawText(Title,
                 new(TitleBar.Left + 2.5f * ScaleFactor,

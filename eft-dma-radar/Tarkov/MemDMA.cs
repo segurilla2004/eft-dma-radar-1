@@ -1,19 +1,19 @@
-﻿global using static eft_dma_radar.Tarkov.MemoryInterface;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.Loot;
+﻿global using static LonesEFTRadar.Tarkov.MemoryInterface;
 using eft_dma_radar.Tarkov.API;
-using eft_dma_radar.UI.Misc;
 using eft_dma_radar.UI.Radar;
 using VmmFrost;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_radar.Tarkov.GameWorld.Explosives;
-using eft_dma_radar.Tarkov.GameWorld.Exits;
 using System.Runtime;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Misc;
+using LonesEFTRadar.Tarkov.GameWorld.Exits;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.Tarkov.GameWorld;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.Tarkov.GameWorld.Explosives;
+using LonesEFTRadar.UI.Misc;
+using Common.DMA;
+using Common.Misc;
+using Common.Unity;
 
-namespace eft_dma_radar.Tarkov
+namespace LonesEFTRadar.Tarkov
 {
     internal static class MemoryInterface
     {

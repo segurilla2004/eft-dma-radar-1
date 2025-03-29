@@ -1,6 +1,6 @@
-﻿using arena_dma_radar.UI.Misc;
+﻿using LonesArenaRadar.UI.Misc;
 
-namespace arena_dma_radar.UI.ESP
+namespace LonesArenaRadar.UI.ESP
 {
     internal static class ESP
     {

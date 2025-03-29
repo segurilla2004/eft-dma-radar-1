@@ -1,6 +1,7 @@
-﻿using VmmFrost;
+﻿using eft_dma_shared;
+using VmmFrost;
 
-namespace eft_dma_shared.Common.DMA.ScatterAPI
+namespace Common.DMA.ScatterAPI
 {
     /// <summary>
     /// Wraps Memory Writing functionality via Vmmsharp Scatter API.

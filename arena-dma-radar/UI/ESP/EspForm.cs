@@ -1,13 +1,14 @@
 ﻿using arena_dma_radar.Features;
-using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.Arena.GameWorld;
-using arena_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
-using arena_dma_radar.Arena.Features.MemoryWrites;
 using eft_dma_shared.Common.ESP;
 using eft_dma_shared.Common.Players;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.Arena.GameWorld;
+using LonesArenaRadar.UI.Misc;
+using LonesArenaRadar;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Misc;
+using Common.Unity;
+using Common.Features;
 
 namespace arena_dma_radar.UI.ESP
 {

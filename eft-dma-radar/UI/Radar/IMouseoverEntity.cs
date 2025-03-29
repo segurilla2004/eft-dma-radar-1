@@ -1,7 +1,7 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_shared.Common.Maps;
+﻿using Common.Maps;
+using LonesEFTRadar.Tarkov.EFTPlayer;
 
-namespace eft_dma_radar.UI.Radar
+namespace LonesEFTRadar.UI.Radar
 {
     /// <summary>
     /// Defines a Radar Map Mouseover Entity.

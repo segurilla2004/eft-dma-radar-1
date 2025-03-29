@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Unity
+﻿namespace Common.Unity
 {
     public readonly struct UnityOffsets
     {

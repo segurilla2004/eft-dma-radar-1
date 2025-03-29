@@ -1,7 +1,7 @@
 ﻿using System.Collections.Frozen;
 using System.Numerics;
 
-namespace eft_dma_shared.Common.Misc.Data
+namespace Common.Misc.Data
 {
     /// <summary>
     /// Contains Static Game Data.

@@ -1,4 +1,4 @@
-﻿namespace eft_dma_radar.UI.SKWidgetControl
+﻿namespace LonesEFTRadar.UI.SKWidgetControl
 {
     public enum WidgetClickEvent
     {

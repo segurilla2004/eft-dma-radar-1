@@ -1,8 +1,10 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.UI.Misc;
-using eft_dma_shared.Common.DMA;
+﻿using LonesEFTRadar.Tarkov;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.Misc;
+using Common.DMA;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.API
+namespace LonesEFTRadar.Tarkov.API
 {
     public static class EFTProfileService
     {
@@ -26,8 +28,8 @@ namespace eft_dma_radar.Tarkov.API
                 Priority = ThreadPriority.Lowest,
                 IsBackground = true
             }.Start();
-            MemDMA.GameStarted += MemDMA_GameStarted;
-            MemDMA.GameStopped += MemDMA_GameStopped;
+            MemDMABase.GameStarted += MemDMA_GameStarted;
+            MemDMABase.GameStopped += MemDMA_GameStopped;
         }
 
         private static void MemDMA_GameStopped(object sender, EventArgs e)
@@ -123,7 +125,7 @@ namespace eft_dma_radar.Tarkov.API
                     /// Disabling it for now.
                     //result ??= await LookupFromEftApiTechAsync(accountId);
                     if (result is not null ||
-                        (result is null && /*_eftApiNotFound.Contains(accountId) &&*/ _tdevNotFound.Contains(accountId)))
+                        result is null && /*_eftApiNotFound.Contains(accountId) &&*/ _tdevNotFound.Contains(accountId))
                     {
                         Cache.Profiles[accountId] = result;
                     }

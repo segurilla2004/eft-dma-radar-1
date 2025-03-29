@@ -1,7 +1,7 @@
-﻿using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Misc;
+﻿using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.Misc;
 
-namespace arena_dma_radar.UI.ColorPicker.Radar
+namespace LonesArenaRadar.UI.ColorPicker.Radar
 {
     public enum RadarColorOption
     {

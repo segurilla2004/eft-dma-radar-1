@@ -1,8 +1,9 @@
 ﻿using arena_dma_radar.UI.Radar;
-using arena_dma_radar.UI.Misc;
+using Common.Misc;
+using Common.Unity;
 using DarkModeForms;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
+using LonesArenaRadar;
+using LonesArenaRadar.UI.Misc;
 
 namespace arena_dma_radar.UI.Hotkeys
 {

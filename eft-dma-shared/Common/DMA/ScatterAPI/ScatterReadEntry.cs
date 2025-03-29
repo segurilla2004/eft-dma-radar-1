@@ -1,12 +1,11 @@
-﻿using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc;
+using Common.Misc.Pools;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using static eft_dma_shared.Common.Unity.UnityTransform;
+using static Common.Unity.UnityTransform;
 
-namespace eft_dma_shared.Common.DMA.ScatterAPI
+namespace Common.DMA.ScatterAPI
 {
     public sealed class ScatterReadEntry<T> : IScatterEntry, IPooledObject<ScatterReadEntry<T>>
     {
@@ -189,7 +188,7 @@ namespace eft_dma_shared.Common.DMA.ScatterAPI
             uint pageOffset = MemDMABase.BYTE_OFFSET(Address); // Get object offset from the page start address
 
             var bytesCopied = 0; // track number of bytes copied to ensure nothing is missed
-            uint cb = Math.Min((uint)CB, (uint)0x1000 - pageOffset); // bytes to read this page
+            uint cb = Math.Min((uint)CB, 0x1000 - pageOffset); // bytes to read this page
 
             uint numPages =
                 MemDMABase.ADDRESS_AND_SIZE_TO_SPAN_PAGES(Address,

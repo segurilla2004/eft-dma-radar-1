@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc.Data;
+﻿using Common.Misc.Data;
 
-namespace eft_dma_radar.UI.LootFilters
+namespace LonesEFTRadar.UI.LootFilters
 {
     public sealed class UserLootFilter
     {

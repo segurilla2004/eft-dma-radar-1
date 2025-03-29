@@ -1,11 +1,11 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using Svg.Skia;
 using System.IO.Compression;
 using System.Numerics;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     /// <summary>
     /// SVG Map Implementation.

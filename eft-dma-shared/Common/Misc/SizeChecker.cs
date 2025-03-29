@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     /// <summary>
     /// Caches Type Sizes of value types.

@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Unity.LowLevel;
+﻿using Common.Unity.LowLevel;
 
-namespace eft_dma_shared.Common.Misc.Config
+namespace Common.Misc.Config
 {
     public interface IConfig
     {

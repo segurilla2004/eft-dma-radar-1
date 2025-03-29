@@ -1,22 +1,23 @@
-﻿using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Radar;
-using arena_dma_radar.UI.Misc;
-using arena_dma_radar.Arena.ArenaPlayer.Plugins;
-using arena_dma_radar.Arena.GameWorld;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.Unity.LowLevel;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Maps;
-using arena_dma_radar.Arena.Features.MemoryWrites;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Pools;
-using eft_dma_shared.Common.DMA;
+﻿using arena_dma_radar.UI.Radar;
+using LonesArenaRadar.UI.Radar;
+using LonesArenaRadar.Arena.ArenaPlayer.Plugins;
+using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.Misc;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.Arena.GameWorld;
+using Common.Unity;
+using Common.Unity.Collections;
+using Common.Features;
+using Common.Unity.LowLevel;
+using Common.ESP;
+using Common.Maps;
+using Common.Players;
+using Common.Misc.Pools;
+using Common.Misc;
+using Common.DMA;
+using Common.DMA.ScatterAPI;
 
-namespace arena_dma_radar.Arena.ArenaPlayer
+namespace LonesArenaRadar.Arena.ArenaPlayer
 {
     /// <summary>
     /// Base class for Tarkov Players.
@@ -276,17 +277,17 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                 isActive = registered.Contains(this);
             if (isActive)
             {
-                this.SetAlive();
+                SetAlive();
             }
-            else if (this.IsAlive) // Not in list, but alive
+            else if (IsAlive) // Not in list, but alive
             {
-                index.AddEntry<ulong>(0, this.CorpseAddr);
+                index.AddEntry<ulong>(0, CorpseAddr);
                 index.Callbacks += x1 =>
                 {
                     if (x1.TryGetResult<ulong>(0, out var corpsePtr) && corpsePtr != 0x0)
-                        this.SetDead(corpsePtr);
+                        SetDead(corpsePtr);
                     else
-                        this.SetInactive();
+                        SetInactive();
                 };
             }
         }
@@ -327,7 +328,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// <param name="index">Scatter read index dedicated to this player.</param>
         public virtual void OnRealtimeLoop(ScatterReadIndex index)
         {
-            index.AddEntry<Vector2>(-1, this.RotationAddress); // Rotation
+            index.AddEntry<Vector2>(-1, RotationAddress); // Rotation
             foreach (var tr in Skeleton.Bones)
             {
                 index.AddEntry<SharedArray<UnityTransform.TrsX>>((int)(uint)tr.Key, tr.Value.VerticesAddr,
@@ -338,7 +339,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                 bool p1 = false;
                 bool p2 = true;
                 if (x1.TryGetResult<Vector2>(-1, out var rotation))
-                    p1 = this.SetRotation(ref rotation);
+                    p1 = SetRotation(ref rotation);
                 foreach (var tr in Skeleton.Bones)
                 {
                     if (x1.TryGetResult<SharedArray<UnityTransform.TrsX>>((int)(uint)tr.Key, out var vertices))
@@ -351,8 +352,8 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                             }
                             catch (Exception ex) // Attempt to re-allocate Transform on error
                             {
-                                LoneLogging.WriteLine($"ERROR getting Player '{this.Name}' {tr.Key} Position: {ex}");
-                                this.Skeleton.ResetTransform(tr.Key);
+                                LoneLogging.WriteLine($"ERROR getting Player '{Name}' {tr.Key} Position: {ex}");
+                                Skeleton.ResetTransform(tr.Key);
                             }
                         }
                         catch
@@ -367,9 +368,9 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                 }
 
                 if (p1 && p2)
-                    this.ErrorTimer.Reset();
+                    ErrorTimer.Reset();
                 else
-                    this.ErrorTimer.Start();
+                    ErrorTimer.Start();
             };
         }
 
@@ -396,8 +397,8 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                             if (tr.Value.VerticesAddr != verticesPtr) // check if any addr changed
                             {
                                 LoneLogging.WriteLine(
-                                    $"WARNING - '{tr.Key}' Transform has changed for Player '{this.Name}'");
-                                this.Skeleton.ResetTransform(tr.Key); // alloc new transform
+                                    $"WARNING - '{tr.Key}' Transform has changed for Player '{Name}'");
+                                Skeleton.ResetTransform(tr.Key); // alloc new transform
                             }
                         }
                     };
@@ -548,7 +549,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
             }
             bool DoWrite()
             {
-                if (Memory.ReadValue<ulong>(this.CorpseAddr, false) != 0)
+                if (Memory.ReadValue<ulong>(CorpseAddr, false) != 0)
                     return false;
                 if (!game.IsSafeToWriteMem)
                     return false;
@@ -563,7 +564,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// <param name="chamsMaterial"></param>
         private void ApplyClothingChams(ScatterWriteHandle writes, int chamsMaterial)
         {
-            var pRendererContainersArray = Memory.ReadPtr(this.Body + Offsets.PlayerBody._bodyRenderers, false);
+            var pRendererContainersArray = Memory.ReadPtr(Body + Offsets.PlayerBody._bodyRenderers, false);
             using var rendererContainersArray = MemArray<Types.BodyRendererContainer>.Get(pRendererContainersArray, false);
             ArgumentOutOfRangeException.ThrowIfZero(rendererContainersArray.Count);
 
@@ -588,7 +589,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// <param name="chamsMaterial"></param>
         private void ApplyGearChams(ScatterWriteHandle writes, int chamsMaterial)
         {
-            var slotViews = Memory.ReadValue<ulong>(this.Body + Offsets.PlayerBody.SlotViews, false);
+            var slotViews = Memory.ReadValue<ulong>(Body + Offsets.PlayerBody.SlotViews, false);
             if (!Utils.IsValidVirtualAddress(slotViews))
                 return;
 
@@ -655,7 +656,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
             if (materialsCount == 0)
                 return;
             var materialsArrayPtr = Memory.ReadPtr(renderer + UnityOffsets.Renderer.Materials, false);
-            var materials = Enumerable.Repeat<int>(chamsMaterial, materialsCount).ToArray();
+            var materials = Enumerable.Repeat(chamsMaterial, materialsCount).ToArray();
             writes.AddBufferEntry(materialsArrayPtr, materials.AsSpan());
         }
 
@@ -663,31 +664,31 @@ namespace arena_dma_radar.Arena.ArenaPlayer
 
         #region Interfaces
         public Vector2 MouseoverPosition { get; set; }
-        public ref Vector3 Position => ref this.Skeleton.Root.Position;
+        public ref Vector3 Position => ref Skeleton.Root.Position;
 
         public void Draw(SKCanvas canvas, LoneMapParams mapParams, ILocalPlayer localPlayer)
         {
             try
             {
-                var point = this.Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
-                this.MouseoverPosition = new(point.X, point.Y);
-                if (!this.IsAlive) // Player Dead -- Draw 'X' death marker and move on
+                var point = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+                MouseoverPosition = new(point.X, point.Y);
+                if (!IsAlive) // Player Dead -- Draw 'X' death marker and move on
                     DrawDeathMarker(canvas, point);
                 else
                 {
                     DrawPlayerMarker(canvas, localPlayer, point);
                     if (this == localPlayer)
                         return;
-                    var height = this.Position.Y - localPlayer.Position.Y;
-                    var dist = Vector3.Distance(localPlayer.Position, this.Position);
+                    var height = Position.Y - localPlayer.Position.Y;
+                    var dist = Vector3.Distance(localPlayer.Position, Position);
                     string[] lines = null;
                     if (!MainForm.Config.HideNames) // show full names & info
                     {
                         string name = null;
-                        if (this.ErrorTimer.ElapsedMilliseconds > 100)
+                        if (ErrorTimer.ElapsedMilliseconds > 100)
                             name = "ERROR"; // In case POS stops updating, let us know!
                         else
-                            name = this.Name;
+                            name = Name;
                         string health = null;
                         if (this is ArenaObservedPlayer observed)
                             health = observed.HealthStatus is Enums.ETagStatus.Healthy ?
@@ -704,7 +705,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                         {
                         $"{(int)Math.Round(height)},{(int)Math.Round(dist)}"
                         };
-                        if (this.ErrorTimer.ElapsedMilliseconds > 100)
+                        if (ErrorTimer.ElapsedMilliseconds > 100)
                             lines[0] = "ERROR"; // In case POS stops updating, let us know!
                     }
                     DrawPlayerText(canvas, point, lines);
@@ -721,11 +722,11 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// </summary>
         private void DrawPlayerMarker(SKCanvas canvas, IPlayer localPlayer, SKPoint point)
         {
-            var radians = this.MapRotation.ToRadians();
+            var radians = MapRotation.ToRadians();
             var paints = GetPaints();
-            if (this != localPlayer && MainForm.MouseoverGroup is int grp && grp == this.TeamID)
+            if (this != localPlayer && MainForm.MouseoverGroup is int grp && grp == TeamID)
                 paints.Item1 = SKPaints.PaintMouseoverGroup;
-            SKPaints.ShapeOutline.StrokeWidth = paints.Item1.StrokeWidth + (2f * MainForm.UIScale);
+            SKPaints.ShapeOutline.StrokeWidth = paints.Item1.StrokeWidth + 2f * MainForm.UIScale;
 
             var size = 6 * MainForm.UIScale;
             canvas.DrawCircle(point, size, SKPaints.ShapeOutline); // Draw outline
@@ -733,7 +734,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
 
             int aimlineLength = this == localPlayer ?
                 MainForm.Config.AimLineLength : 15;
-            if (!this.IsFriendly && this.IsFacingTarget(localPlayer)) // Hostile Player, check if aiming at a friendly (High Alert)
+            if (!IsFriendly && this.IsFacingTarget(localPlayer)) // Hostile Player, check if aiming at a friendly (High Alert)
                 aimlineLength = 9999;
 
             var aimlineEnd = GetAimlineEndpoint(point, radians, aimlineLength);
@@ -765,7 +766,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         private void DrawPlayerText(SKCanvas canvas, SKPoint point, string[] lines)
         {
             var paints = GetPaints();
-            if (MainForm.MouseoverGroup is int grp && grp == this.TeamID)
+            if (MainForm.MouseoverGroup is int grp && grp == TeamID)
                 paints.Item2 = SKPaints.TextMouseoverGroup;
             float spacing = 3 * MainForm.UIScale;
             point.Offset(9 * MainForm.UIScale, spacing);
@@ -781,13 +782,13 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         }
         private ValueTuple<SKPaint, SKPaint> GetPaints()
         {
-            if (this.IsAimbotLocked)
+            if (IsAimbotLocked)
                 return new(SKPaints.PaintAimbotLocked, SKPaints.TextAimbotLocked);
             else if (this is LocalPlayer)
                 return new(SKPaints.PaintLocalPlayer, null);
-            else if (this.IsFocused)
+            else if (IsFocused)
                 return new(SKPaints.PaintFocused, SKPaints.TextFocused);
-            switch (this.Type)
+            switch (Type)
             {
                 case PlayerType.Teammate:
                     return new(SKPaints.PaintTeammate, SKPaints.TextTeammate);
@@ -804,9 +805,9 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         public void DrawMouseover(SKCanvas canvas, LoneMapParams mapParams, LocalPlayer localPlayer)
         {
             List<string> lines = new();
-            string name = MainForm.Config.HideNames && this.IsHuman ? 
-                "<Hidden>" : this.Name;
-            if (this.IsStreaming) // Streamer Notice
+            string name = MainForm.Config.HideNames && IsHuman ?
+                "<Hidden>" : Name;
+            if (IsStreaming) // Streamer Notice
                 lines.Add("[LIVE TTV - Double Click]");
             if (this is ArenaObservedPlayer observed)
             {
@@ -826,42 +827,42 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                         lines.Add($"{item.Key}: {item.Value}");
                 }
             }
-            else 
+            else
                 return;
-            this.Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);
+            Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);
         }
 
         public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)
         {
             if (this == localPlayer ||
-                    !this.IsActive || !this.IsAlive)
+                    !IsActive || !IsAlive)
                 return;
             bool showInfo = ESP.Config.PlayerRendering.ShowLabels;
             bool showDist = ESP.Config.PlayerRendering.ShowDist;
             bool showWep = ESP.Config.PlayerRendering.ShowWeapons;
             bool drawLabel = showInfo || showDist || showWep;
-            var dist = Vector3.Distance(localPlayer.Position, this.Position);
+            var dist = Vector3.Distance(localPlayer.Position, Position);
             if (dist > LocalGameWorld.MAX_DIST)
                 return;
 
-            if (this.IsHostile && (ESP.Config.HighAlert && this.IsHuman)) // Check High Alert
+            if (IsHostile && ESP.Config.HighAlert && IsHuman) // Check High Alert
             {
                 if (this.IsFacingTarget(localPlayer))
                 {
-                    if (!this.HighAlertSw.IsRunning)
-                        this.HighAlertSw.Start();
-                    else if (this.HighAlertSw.Elapsed.TotalMilliseconds >= 500f) // Don't draw twice or more
+                    if (!HighAlertSw.IsRunning)
+                        HighAlertSw.Start();
+                    else if (HighAlertSw.Elapsed.TotalMilliseconds >= 500f) // Don't draw twice or more
                         HighAlert.DrawHighAlertESP(canvas, this);
                 }
                 else
-                    this.HighAlertSw.Reset();
+                    HighAlertSw.Reset();
             }
             if (!CameraManagerBase.WorldToScreen(ref Position, out var baseScrPos))
                 return;
-            var paint = this.GetEspPlayerPaint();
+            var paint = GetEspPlayerPaint();
             if (ESP.Config.PlayerRendering.RenderingMode is ESPPlayerRenderMode.Bones) // Draw Player Bones
             {
-                if (!this.Skeleton.UpdateESPBuffer())
+                if (!Skeleton.UpdateESPBuffer())
                     return;
                 canvas.DrawPoints(SKPointMode.Lines, Skeleton.ESPBuffer, paint.Item1);
             }
@@ -884,10 +885,10 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                         lines[0] += $" ({(int)dist}m)";
                 }
                 var textPt = new SKPoint(baseScrPos.X,
-                    baseScrPos.Y + (paint.Item2.TextSize * ESP.Config.FontScale));
+                    baseScrPos.Y + paint.Item2.TextSize * ESP.Config.FontScale);
                 textPt.DrawESPText(canvas, observed, localPlayer, false, paint.Item2, lines.ToArray());
             }
-            if (ESP.Config.ShowAimLock && this.IsAimbotLocked) // Show aim lock
+            if (ESP.Config.ShowAimLock && IsAimbotLocked) // Show aim lock
             {
                 var info = MemWriteFeature<Aimbot>.Instance.Cache;
                 if (info is not null &&
@@ -908,19 +909,19 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// </summary>
         public ValueTuple<SKPaint, SKPaint> GetEspPlayerPaint()
         {
-            if (this.IsAimbotLocked)
+            if (IsAimbotLocked)
                 return new(SKPaints.PaintAimbotLockedESP, SKPaints.TextAimbotLockedESP);
-            else if (this.IsFocused)
+            else if (IsFocused)
                 return new(SKPaints.PaintFocusedESP, SKPaints.TextFocusedESP);
-            switch (this.Type)
+            switch (Type)
             {
-                case Player.PlayerType.Teammate:
+                case PlayerType.Teammate:
                     return new(SKPaints.PaintTeammateESP, SKPaints.TextTeammateESP);
-                case Player.PlayerType.Player:
+                case PlayerType.Player:
                     return new(SKPaints.PaintPlayerESP, SKPaints.TextPlayerESP);
-                case Player.PlayerType.AI:
+                case PlayerType.AI:
                     return new(SKPaints.PaintAIESP, SKPaints.TextAIESP);
-                case Player.PlayerType.Streamer:
+                case PlayerType.Streamer:
                     return new(SKPaints.PaintStreamerESP, SKPaints.TextStreamerESP);
                 default:
                     return new(SKPaints.PaintPlayerESP, SKPaints.TextPlayerESP);
@@ -938,9 +939,9 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         public void ToggleFocus()
         {
             if (this is not ArenaObservedPlayer ||
-                !this.IsHumanActive)
+                !IsHumanActive)
                 return;
-            string id = this.AccountID?.Trim();
+            string id = AccountID?.Trim();
             if (string.IsNullOrEmpty(id))
                 return;
             lock (_focusedPlayers)
@@ -960,7 +961,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
         /// <returns>True if focused, otherwise False.</returns>
         protected bool CheckIfFocused()
         {
-            string id = this.AccountID?.Trim();
+            string id = AccountID?.Trim();
             if (string.IsNullOrEmpty(id))
                 return false;
             lock (_focusedPlayers)

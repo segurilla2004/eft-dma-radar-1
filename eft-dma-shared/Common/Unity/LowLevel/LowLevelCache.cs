@@ -1,7 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using System.Text.Json.Serialization;
+using eft_dma_shared;
 
-namespace eft_dma_shared.Common.Unity.LowLevel
+namespace Common.Unity.LowLevel
 {
     /// <summary>
     /// Contains Cache Data for Unity Low Level API.

@@ -1,15 +1,16 @@
-﻿global using static arena_dma_radar.Arena.MemoryInterface;
-using arena_dma_radar.Arena.ArenaPlayer;
+﻿global using static LonesArenaRadar.Arena.MemoryInterface;
 using arena_dma_radar.UI.Radar;
-using arena_dma_radar.UI.Misc;
 using VmmFrost;
-using arena_dma_radar.Arena.GameWorld;
 using System.Runtime;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Misc;
+using LonesArenaRadar.Arena.GameWorld;
+using LonesArenaRadar;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using LonesArenaRadar.UI.Misc;
+using Common.DMA;
+using Common.Misc;
+using Common.Unity;
 
-namespace arena_dma_radar.Arena
+namespace LonesArenaRadar.Arena
 {
 
     internal static class MemoryInterface

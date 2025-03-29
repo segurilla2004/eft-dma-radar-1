@@ -1,4 +1,4 @@
-﻿namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
+﻿namespace Common.Unity.LowLevel.Hooks
 {
     internal static class NativeOffsets
     {

@@ -1,8 +1,7 @@
-﻿using eft_dma_shared.Common.Misc;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Misc.Pools
+namespace Common.Misc.Pools
 {
     /// <summary>
     /// Interface devinces a class object that can be rented from an Object Pool for improved allocation performance.

@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using Common.Misc.Data;
+using Common.Unity.Collections;
 
-namespace arena_dma_radar.Arena.ArenaPlayer.Plugins
+namespace LonesArenaRadar.Arena.ArenaPlayer.Plugins
 {
     public sealed class HandsManager
     {

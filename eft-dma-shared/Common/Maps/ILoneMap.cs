@@ -2,7 +2,7 @@
 using SkiaSharp.Views.Desktop;
 using System.Numerics;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     public interface ILoneMap : IDisposable
     {

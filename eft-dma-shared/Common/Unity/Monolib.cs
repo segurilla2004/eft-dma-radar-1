@@ -1,12 +1,12 @@
-﻿using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity.Collections;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
 using System.Text;
+using Common.Unity.Collections;
+using Common.Misc;
+using Common.DMA;
+using Common.DMA.ScatterAPI;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     public static class MonoLib
     {
@@ -314,7 +314,7 @@ namespace eft_dma_shared.Common.Unity
                                                             {
                                                                 if ((monoClass.Inited & 1) != 1 ||           // !class->inited
                                                                     (monoClass.Flags & 0x100000) != 0 ||     // class->exception_type != MONO_EXCEPTION_NONE
-                                                                    (monoClass.ClassKind != 3))  // class->class_kind != MONO_CLASS_GINST
+                                                                    monoClass.ClassKind != 3)  // class->class_kind != MONO_CLASS_GINST
                                                                 {
                                                                     return;
                                                                 }
@@ -439,7 +439,7 @@ namespace eft_dma_shared.Common.Unity
 
             public readonly ulong GetStaticFieldData(MonoValue<MonoVTable> pThis)
             {
-                if ((this.Flags & 4) != 0)
+                if ((Flags & 4) != 0)
                     return MonoReadPtr(pThis + 0x48 + 8 * (uint)MonoRead<int>(p0 + 0x5C).Value);
                 return 0x0;
             }
@@ -546,11 +546,11 @@ namespace eft_dma_shared.Common.Unity
             {
                 ulong monoPtr = 0x0;
 
-                int methodCount = this.GetNumMethods();
+                int methodCount = GetNumMethods();
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(methodCount, 10000, nameof(methodCount));
                 for (int i = 0; i < methodCount; i++)
                 {
-                    var method = this.GetMethod(i);
+                    var method = GetMethod(i);
 
                     if (method == 0x0)
                         continue;
@@ -611,11 +611,11 @@ namespace eft_dma_shared.Common.Unity
 
             public readonly MonoClassField FindField(string field_name)
             {
-                int fieldCount = this.NumFields;
+                int fieldCount = NumFields;
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(fieldCount, 10000, nameof(fieldCount));
                 for (int i = 0; i < fieldCount; i++)
                 {
-                    var pField = this.GetField(i);
+                    var pField = GetField(i);
                     if (pField == 0x0)
                         continue;
                     if (pField.Value.GetName() == field_name)
@@ -630,7 +630,7 @@ namespace eft_dma_shared.Common.Unity
 
             public ulong GetStaticFieldData()
             {
-                var vTable = this.GetVTable(MonoRootDomain.Get());
+                var vTable = GetVTable(MonoRootDomain.Get());
                 ArgumentOutOfRangeException.ThrowIfZero((ulong)vTable, nameof(vTable));
                 var staticFieldData = vTable.Value.GetStaticFieldData(vTable);
                 ArgumentOutOfRangeException.ThrowIfZero(staticFieldData, nameof(staticFieldData));
@@ -698,11 +698,11 @@ namespace eft_dma_shared.Common.Unity
 
             public readonly ulong Lookup(ulong key)
             {
-                var v4 = MonoRead<MonoHashTable>(MonoReadPtr(pData + 0x8 * (ulong)((uint)key % this.Size)));
+                var v4 = MonoRead<MonoHashTable>(MonoReadPtr(pData + 0x8 * (ulong)((uint)key % Size)));
                 if (v4 == 0x0)
                     return default;
 
-                while ((ulong)v4.Value.KeyExtract != key)
+                while (v4.Value.KeyExtract != key)
                 {
                     v4 = MonoRead<MonoHashTable>(v4.Value.pNextValue);
                     if (v4 == 0x0)
@@ -728,7 +728,7 @@ namespace eft_dma_shared.Common.Unity
 
             public readonly MonoValue<MonoClass> Get(MonoValue<MonoImage> pThis, int typeID)
             {
-                if ((this.Flags & 0x20) != 0)
+                if ((Flags & 0x20) != 0)
                     return default;
                 if ((typeID & 0xFF000000) != 0x2000000)
                     return default;
@@ -835,7 +835,7 @@ namespace eft_dma_shared.Common.Unity
                     var rootDomain = MonoRootDomain.Get();
                     ArgumentOutOfRangeException.ThrowIfZero((ulong)rootDomain, nameof(rootDomain));
                     var pJittedTable = rootDomain.Value.pJittedFunctionTable;
-                    ArgumentOutOfRangeException.ThrowIfZero((ulong)pJittedTable, nameof(pJittedTable));
+                    ArgumentOutOfRangeException.ThrowIfZero(pJittedTable, nameof(pJittedTable));
                     int count1 = MonoRead<int>(pJittedTable + 0x8).Value;
                     ArgumentOutOfRangeException.ThrowIfNegative(count1, nameof(count1));
                     ArgumentOutOfRangeException.ThrowIfGreaterThan(count1, 30000, nameof(count1));

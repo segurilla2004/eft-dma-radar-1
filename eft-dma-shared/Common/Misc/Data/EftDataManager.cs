@@ -1,4 +1,5 @@
-﻿using eft_dma_shared.Common.Misc.Data.TarkovMarket;
+﻿using Common.Misc.Data.TarkovMarket;
+using eft_dma_shared;
 using eft_dma_shared.Common.UI;
 using System.Collections.Frozen;
 using System.Reflection;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Misc.Data
+namespace Common.Misc.Data
 {
     public static class EftDataManager
     {

@@ -1,8 +1,7 @@
-﻿using eft_dma_shared.Common.Misc;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     /// <summary>
     /// Encapsulates a timer based on the CreateWaitableTimerEx Win32 API.

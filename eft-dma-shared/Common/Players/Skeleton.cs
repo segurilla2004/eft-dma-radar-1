@@ -1,9 +1,9 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Unity;
+﻿using eft_dma_shared.Common.ESP;
 using SkiaSharp;
+using Common.Unity;
+using Common.Misc;
 
-namespace eft_dma_shared.Common.Players
+namespace Common.Players
 {
     /// <summary>
     /// Contains abstractions for drawing Player Skeletons.
@@ -58,7 +58,7 @@ namespace eft_dma_shared.Common.Players
             _ = Root.UpdatePosition();
             var bones = new Dictionary<Bones, UnityTransform>(AllSkeletonBones.Length + 1)
             {
-                [eft_dma_shared.Common.Unity.Bones.HumanBase] = Root
+                [Unity.Bones.HumanBase] = Root
             };
             foreach (var bone in AllSkeletonBones.Span)
             {
@@ -77,14 +77,14 @@ namespace eft_dma_shared.Common.Players
             LoneLogging.WriteLine($"Attempting to get new {bone} Transform for Player '{_player.Name}'...");
             var transform = new UnityTransform(_bones[bone].TransformInternal);
             _bones[bone] = transform;
-            if (bone is eft_dma_shared.Common.Unity.Bones.HumanBase)
+            if (bone is Unity.Bones.HumanBase)
                 Root = transform;
             LoneLogging.WriteLine($"[OK] New {bone} Transform for Player '{_player.Name}'");
         }
 
         /// <summary>
         /// Updates the static ESP Buffer with the current Skeleton Bone Screen Coordinates.<br />
-        /// See <see cref="Skeleton.ESPBuffer"/><br />
+        /// See <see cref="ESPBuffer"/><br />
         /// NOT THREAD SAFE!
         /// </summary>
         /// <returns>True if successful, otherwise False.</returns>
@@ -158,7 +158,7 @@ namespace eft_dma_shared.Common.Players
 
         /// <summary>
         /// Updates the static ESP Widget Buffer with the current Skeleton Bone Screen Coordinates.<br />
-        /// See <see cref="Skeleton.ESPWidgetBuffer"/><br />
+        /// See <see cref="ESPWidgetBuffer"/><br />
         /// NOT THREAD SAFE!
         /// </summary>
         /// <param name="scaleX">X Scale Factor.</param>
@@ -245,7 +245,7 @@ namespace eft_dma_shared.Common.Players
         /// <returns>Box ESP Screen Coordinates.</returns>
         public SKRect? GetESPBox(SKPoint baseScreen)
         {
-            if (!CameraManagerBase.WorldToScreen(ref _bones[eft_dma_shared.Common.Unity.Bones.HumanHead].Position, out var topScreen, true, true))
+            if (!CameraManagerBase.WorldToScreen(ref _bones[Unity.Bones.HumanHead].Position, out var topScreen, true, true))
                 return null;
 
             float height = Math.Abs(topScreen.Y - baseScreen.Y);
@@ -266,22 +266,22 @@ namespace eft_dma_shared.Common.Players
         /// </summary>
         public enum SkeletonBones : uint
         {
-            Head = eft_dma_shared.Common.Unity.Bones.HumanHead,
-            Neck = eft_dma_shared.Common.Unity.Bones.HumanNeck,
-            UpperTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine3,
-            MidTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine2,
-            LowerTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine1,
-            LeftShoulder = eft_dma_shared.Common.Unity.Bones.HumanLCollarbone,
-            RightShoulder = eft_dma_shared.Common.Unity.Bones.HumanRCollarbone,
-            LeftElbow = eft_dma_shared.Common.Unity.Bones.HumanLForearm2,
-            RightElbow = eft_dma_shared.Common.Unity.Bones.HumanRForearm2,
-            LeftHand = eft_dma_shared.Common.Unity.Bones.HumanLPalm,
-            RightHand = eft_dma_shared.Common.Unity.Bones.HumanRPalm,
-            Pelvis = eft_dma_shared.Common.Unity.Bones.HumanPelvis,
-            LeftKnee = eft_dma_shared.Common.Unity.Bones.HumanLThigh2,
-            RightKnee = eft_dma_shared.Common.Unity.Bones.HumanRThigh2,
-            LeftFoot = eft_dma_shared.Common.Unity.Bones.HumanLFoot,
-            RightFoot = eft_dma_shared.Common.Unity.Bones.HumanRFoot
+            Head = Unity.Bones.HumanHead,
+            Neck = Unity.Bones.HumanNeck,
+            UpperTorso = Unity.Bones.HumanSpine3,
+            MidTorso = Unity.Bones.HumanSpine2,
+            LowerTorso = Unity.Bones.HumanSpine1,
+            LeftShoulder = Unity.Bones.HumanLCollarbone,
+            RightShoulder = Unity.Bones.HumanRCollarbone,
+            LeftElbow = Unity.Bones.HumanLForearm2,
+            RightElbow = Unity.Bones.HumanRForearm2,
+            LeftHand = Unity.Bones.HumanLPalm,
+            RightHand = Unity.Bones.HumanRPalm,
+            Pelvis = Unity.Bones.HumanPelvis,
+            LeftKnee = Unity.Bones.HumanLThigh2,
+            RightKnee = Unity.Bones.HumanRThigh2,
+            LeftFoot = Unity.Bones.HumanLFoot,
+            RightFoot = Unity.Bones.HumanRFoot
         }
 
         /// <summary>
@@ -289,10 +289,10 @@ namespace eft_dma_shared.Common.Players
         /// </summary>
         public enum TorsoBones : uint
         {
-            Neck = eft_dma_shared.Common.Unity.Bones.HumanNeck,
-            UpperTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine3,
-            MidTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine2,
-            LowerTorso = eft_dma_shared.Common.Unity.Bones.HumanSpine1
+            Neck = Unity.Bones.HumanNeck,
+            UpperTorso = Unity.Bones.HumanSpine3,
+            MidTorso = Unity.Bones.HumanSpine2,
+            LowerTorso = Unity.Bones.HumanSpine1
         }
 
         /// <summary>
@@ -300,23 +300,23 @@ namespace eft_dma_shared.Common.Players
         /// </summary>
         public enum ArmsBones : uint
         {
-            LeftShoulder = eft_dma_shared.Common.Unity.Bones.HumanLCollarbone,
-            RightShoulder = eft_dma_shared.Common.Unity.Bones.HumanRCollarbone,
-            LeftElbow = eft_dma_shared.Common.Unity.Bones.HumanLForearm2,
-            RightElbow = eft_dma_shared.Common.Unity.Bones.HumanRForearm2,
-            LeftHand = eft_dma_shared.Common.Unity.Bones.HumanLPalm,
-            RightHand = eft_dma_shared.Common.Unity.Bones.HumanRPalm
+            LeftShoulder = Unity.Bones.HumanLCollarbone,
+            RightShoulder = Unity.Bones.HumanRCollarbone,
+            LeftElbow = Unity.Bones.HumanLForearm2,
+            RightElbow = Unity.Bones.HumanRForearm2,
+            LeftHand = Unity.Bones.HumanLPalm,
+            RightHand = Unity.Bones.HumanRPalm
         }
         /// <summary>
         /// All Legs Bones
         /// </summary>
         public enum LegsBones : uint
         {
-            Pelvis = eft_dma_shared.Common.Unity.Bones.HumanPelvis,
-            LeftKnee = eft_dma_shared.Common.Unity.Bones.HumanLThigh2,
-            RightKnee = eft_dma_shared.Common.Unity.Bones.HumanRThigh2,
-            LeftFoot = eft_dma_shared.Common.Unity.Bones.HumanLFoot,
-            RightFoot = eft_dma_shared.Common.Unity.Bones.HumanRFoot
+            Pelvis = Unity.Bones.HumanPelvis,
+            LeftKnee = Unity.Bones.HumanLThigh2,
+            RightKnee = Unity.Bones.HumanRThigh2,
+            LeftFoot = Unity.Bones.HumanLFoot,
+            RightFoot = Unity.Bones.HumanRFoot
         }
     }
 }

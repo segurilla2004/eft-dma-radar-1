@@ -1,10 +1,9 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel.Types;
+﻿using Common.Misc;
+using Common.Unity.LowLevel.Types;
 using System;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
+namespace Common.Unity.LowLevel.Hooks
 {
     public static class NativeMethods
     {

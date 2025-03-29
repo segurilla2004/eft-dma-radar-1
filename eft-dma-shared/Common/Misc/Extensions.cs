@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     /// <summary>
     /// Extension methods go here.
@@ -178,7 +178,7 @@ namespace eft_dma_shared.Common.Misc
         public static unsafe bool IsNormalOrZero(this float f)
         {
             int bits = *(int*)&f & 0x7FFFFFFF; // Clears the sign bit
-            return bits == 0 || (bits >= 0x00800000 && bits < 0x7F800000); // Allow 0, normal values, but not subnormal, infinity, or NaN
+            return bits == 0 || bits >= 0x00800000 && bits < 0x7F800000; // Allow 0, normal values, but not subnormal, infinity, or NaN
         }
 
         /// <summary>

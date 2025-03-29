@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer.Plugins;
-using arena_dma_radar.Arena.GameWorld;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+﻿using LonesArenaRadar.Arena.ArenaPlayer.Plugins;
+using LonesArenaRadar.Arena.GameWorld;
+using Common.Players;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
+using Common.Unity;
 
-namespace arena_dma_radar.Arena.ArenaPlayer
+namespace LonesArenaRadar.Arena.ArenaPlayer
 {
     public sealed class ArenaObservedPlayer : Player
     {
@@ -102,7 +102,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
             MovementContext = GetMovementContext();
             RotationAddress = ValidateRotationAddr(MovementContext + Offsets.ObservedMovementController.Rotation);
             /// Setup Transforms
-            this.Skeleton = new Skeleton(this, GetTransformInternalChain);
+            Skeleton = new Skeleton(this, GetTransformInternalChain);
             bool isAI = Memory.ReadValue<bool>(this + Offsets.ObservedPlayerView.IsAI);
             IsHuman = !isAI;
             if (isAI)

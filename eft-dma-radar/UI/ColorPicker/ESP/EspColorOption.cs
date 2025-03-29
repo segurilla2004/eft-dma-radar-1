@@ -1,6 +1,6 @@
-﻿using eft_dma_radar.UI.Misc;
+﻿using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.UI.ColorPicker.ESP
+namespace LonesEFTRadar.UI.ColorPicker.ESP
 {
     public enum EspColorOption
     {

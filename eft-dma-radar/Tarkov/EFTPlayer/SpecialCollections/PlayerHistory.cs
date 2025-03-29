@@ -1,7 +1,8 @@
-﻿using eft_dma_radar.UI.Misc;
-using eft_dma_radar.UI.Radar;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.SpecialCollections
+namespace LonesEFTRadar.Tarkov.EFTPlayer.SpecialCollections
 {
     /// <summary>
     /// Wrapper class to manage Player History.

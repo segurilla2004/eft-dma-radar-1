@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace eft_dma_shared.Common.Players
+namespace Common.Players
 {
     /// <summary>
     /// Interface defining a Player.

@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc.Data;
+﻿using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     /// <summary>
     /// Defines a static/dynamic spawn Quest Item (not normal loot).

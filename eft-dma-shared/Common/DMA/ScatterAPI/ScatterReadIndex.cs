@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc.Pools;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.DMA.ScatterAPI
+namespace Common.DMA.ScatterAPI
 {
     /// <summary>
     /// Single scatter read index. May contain multiple child entries.

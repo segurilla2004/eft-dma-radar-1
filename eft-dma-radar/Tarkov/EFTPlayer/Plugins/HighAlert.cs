@@ -1,11 +1,12 @@
-﻿using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+﻿using Common.Misc;
+using Common.Players;
+using Common.Unity;
+using eft_dma_radar.UI.ESP;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
+namespace LonesEFTRadar.Tarkov.EFTPlayer.Plugins
 {
     /// <summary>
     /// Contains 'High Alert' Feature Code.

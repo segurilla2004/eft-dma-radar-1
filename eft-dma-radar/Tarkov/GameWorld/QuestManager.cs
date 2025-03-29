@@ -1,17 +1,18 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Radar;
-using eft_dma_radar.UI.Misc;
+﻿using eft_dma_radar.UI.Radar;
 using System.Collections.Frozen;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Misc;
+using LonesEFTRadar.UI.Radar;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using Common.Unity;
+using Common.Unity.Collections;
+using Common.Maps;
+using Common.Players;
+using Common.Misc;
+using Common.Misc.Data;
 
-namespace eft_dma_radar.Tarkov.GameWorld
+namespace LonesEFTRadar.Tarkov.GameWorld
 {
     public sealed class QuestManager
     {

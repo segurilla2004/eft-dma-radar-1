@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Unity.Collections;
+using Common.Unity;
+using Common.DMA;
+using Common.Misc;
+using Common.DMA.ScatterAPI;
 
-namespace arena_dma_radar.Arena.GameWorld
+namespace LonesArenaRadar.Arena.GameWorld
 {
     public sealed class CameraManager : CameraManagerBase
     {

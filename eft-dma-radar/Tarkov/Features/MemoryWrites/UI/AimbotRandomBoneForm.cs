@@ -1,5 +1,6 @@
-﻿using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_radar.UI.Misc;
+﻿using LonesEFTRadar;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using LonesEFTRadar.UI.Misc;
 
 namespace eft_dma_radar.Features.MemoryWrites.UI
 {

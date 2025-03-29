@@ -1,7 +1,7 @@
 ﻿using System.Buffers.Binary;
 using System.Text;
 
-namespace eft_dma_shared.Common.Unity.LowLevel.Types
+namespace Common.Unity.LowLevel.Types
 {
     public sealed class MonoString : IMonoType
     {

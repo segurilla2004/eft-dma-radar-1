@@ -1,10 +1,10 @@
-﻿using eft_dma_radar.Tarkov.Features;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel.Hooks;
+﻿using Common.Features;
+using Common.Misc;
+using Common.Unity;
+using Common.Unity.LowLevel.Hooks;
+using LonesEFTRadar.Tarkov.Features;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites.Patches
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites.Patches
 {
     public class FixWildSpawnType : MemPatchFeature<FixWildSpawnType>
     {

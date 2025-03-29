@@ -1,13 +1,13 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.ESP;
+﻿using Common.Maps;
+using Common.Misc;
+using Common.Misc.Data;
+using Common.Unity;
 using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.UI.ESP;
 
-namespace eft_dma_radar.UI.Misc
+namespace LonesEFTRadar.UI.Misc
 {
     /// <summary>
     /// Contains long/short names for player gear.
@@ -231,11 +231,11 @@ namespace eft_dma_radar.UI.Misc
         /// <param name="map">Current Map</param>
         /// <returns>Unzoomed 2D Map Position.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 ToMapPos(this System.Numerics.Vector3 vector, LoneMapConfig map) =>
+        public static Vector2 ToMapPos(this Vector3 vector, LoneMapConfig map) =>
             new()
             {
-                X = (map.X * map.SvgScale) + (vector.X * (map.Scale * map.SvgScale)),
-                Y = (map.Y * map.SvgScale) - (vector.Z * (map.Scale * map.SvgScale))
+                X = map.X * map.SvgScale + vector.X * (map.Scale * map.SvgScale),
+                Y = map.Y * map.SvgScale - vector.Z * (map.Scale * map.SvgScale)
             };
 
         /// <summary>
@@ -313,10 +313,10 @@ namespace eft_dma_radar.UI.Misc
             }
             var backer = new SKRect()
             {
-                Bottom = zoomedMapPos.Y + ((lines.Count() * 12f) - 2) * MainForm.UIScale,
-                Left = zoomedMapPos.X + (9 * MainForm.UIScale),
-                Top = zoomedMapPos.Y - (9 * MainForm.UIScale),
-                Right = zoomedMapPos.X + (9 * MainForm.UIScale) + maxLength + (6 * MainForm.UIScale)
+                Bottom = zoomedMapPos.Y + (lines.Count() * 12f - 2) * MainForm.UIScale,
+                Left = zoomedMapPos.X + 9 * MainForm.UIScale,
+                Top = zoomedMapPos.Y - 9 * MainForm.UIScale,
+                Right = zoomedMapPos.X + 9 * MainForm.UIScale + maxLength + 6 * MainForm.UIScale
             };
             canvas.DrawRect(backer, SKPaints.PaintTransparentBacker); // Draw tooltip backer
             zoomedMapPos.Offset(11 * MainForm.UIScale, 3 * MainForm.UIScale);

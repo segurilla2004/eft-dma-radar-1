@@ -1,10 +1,10 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.Features;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using LonesEFTRadar.Tarkov.Features;
+using Common.Features;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
+using Common.Unity;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class FullBright : MemWriteFeature<FullBright>
     {

@@ -1,10 +1,10 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc;
+using Common.Misc.Pools;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     public sealed class UnityTransform
     {
@@ -33,7 +33,7 @@ namespace eft_dma_shared.Common.Unity
             /// Populate Indices once for the Life of the Transform.
             _indices = ReadIndices();
         }
-        
+
         private ReadOnlySpan<int> Indices
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

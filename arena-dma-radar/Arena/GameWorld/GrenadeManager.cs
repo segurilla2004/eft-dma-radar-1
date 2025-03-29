@@ -1,15 +1,15 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Radar;
-using arena_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.Collections;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
+﻿using arena_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc;
+using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.Misc;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Unity;
+using Common.Unity.Collections;
+using Common.Maps;
+using Common.Players;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.GameWorld
+namespace LonesArenaRadar.Arena.GameWorld
 {
     public sealed class GrenadeManager : IReadOnlyCollection<Grenade>
     {

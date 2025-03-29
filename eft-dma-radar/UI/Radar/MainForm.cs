@@ -1,36 +1,41 @@
-﻿using eft_dma_shared.Common.Misc;
-using DarkModeForms;
+﻿using DarkModeForms;
 using eft_dma_radar.Features.MemoryWrites.UI;
 using eft_dma_radar.Tarkov.API;
-using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.Tarkov.EFTPlayer.Plugins;
-using eft_dma_radar.Tarkov.Features;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_radar.Tarkov.Features.MemoryWrites.Patches;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_radar.Tarkov.GameWorld.Exits;
-using eft_dma_radar.Tarkov.GameWorld.Explosives;
-using eft_dma_radar.Tarkov.Loot;
 using eft_dma_radar.UI.ColorPicker;
-using eft_dma_radar.UI.ColorPicker.ESP;
-using eft_dma_radar.UI.ColorPicker.Radar;
 using eft_dma_radar.UI.ESP;
 using eft_dma_radar.UI.Hotkeys;
-using eft_dma_radar.UI.LootFilters;
 using eft_dma_radar.UI.Misc;
-using eft_dma_radar.UI.SKWidgetControl;
-using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel;
 using System.Security.Authentication.ExtendedProtection;
 using System.Timers;
 using static eft_dma_radar.UI.Hotkeys.HotkeyManager;
 using static eft_dma_radar.UI.Hotkeys.HotkeyManager.HotkeyActionController;
 using Timer = System.Timers.Timer;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using LonesEFTRadar.UI.Radar;
+using LonesEFTRadar.UI.SKWidgetControl;
+using LonesEFTRadar.Tarkov.GameWorld.Exits;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ColorPicker;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.Tarkov.Features;
+using LonesEFTRadar.Tarkov.GameWorld.Explosives;
+using LonesEFTRadar.Tarkov.Loot;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites.Patches;
+using LonesEFTRadar.Tarkov.GameWorld;
+using LonesEFTRadar;
+using LonesEFTRadar.Tarkov.EFTPlayer.Plugins;
+using LonesEFTRadar.UI.LootFilters;
+using LonesEFTRadar.UI.ColorPicker.ESP;
+using LonesEFTRadar.UI.ColorPicker.Radar;
+using Common.Misc;
+using Common.Misc.Data;
+using Common.Features;
+using Common.Unity;
+using Common.Unity.LowLevel;
+using Common.ESP;
+using Common.Maps;
 
 namespace eft_dma_radar.UI.Radar
 {
@@ -156,7 +161,7 @@ namespace eft_dma_radar.UI.Radar
             get
             {
                 var players = AllPlayers
-                                  .Where(x => x is not Tarkov.EFTPlayer.LocalPlayer
+                                  .Where(x => x is not LonesEFTRadar.Tarkov.EFTPlayer.LocalPlayer
                                               && !x.HasExfild && (LootCorpsesVisible ? x.IsAlive : true))
                               ?? Enumerable.Empty<Player>();
 

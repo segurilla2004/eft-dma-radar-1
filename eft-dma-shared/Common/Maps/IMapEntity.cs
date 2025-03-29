@@ -1,8 +1,8 @@
-﻿using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Players;
+using Common.Unity;
 using SkiaSharp;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     /// <summary>
     /// Defines an entity that can be drawn on the 2D Radar Map.

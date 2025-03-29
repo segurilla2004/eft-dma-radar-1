@@ -1,9 +1,9 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
+﻿using Common.Misc;
+using Common.Misc.Data;
 using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc.Data;
+using LonesEFTRadar.Tarkov.EFTPlayer;
 
-namespace eft_dma_radar.UI.SKWidgetControl
+namespace LonesEFTRadar.UI.SKWidgetControl
 {
     public sealed class PlayerInfoWidget : SKWidget
     {

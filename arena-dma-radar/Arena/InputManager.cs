@@ -1,10 +1,10 @@
 ﻿using arena_dma_radar.UI.Hotkeys;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity;
+using Common.DMA;
+using Common.Unity;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena
+namespace LonesArenaRadar.Arena
 {
     internal static class InputManager
     {

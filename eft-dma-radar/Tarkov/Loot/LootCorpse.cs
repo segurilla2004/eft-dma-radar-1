@@ -1,6 +1,6 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
+﻿using LonesEFTRadar.Tarkov.EFTPlayer;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     public sealed class LootCorpse : LootContainer
     {

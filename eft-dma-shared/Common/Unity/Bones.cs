@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     /// <summary>
     /// Bones Index for Player Transforms.

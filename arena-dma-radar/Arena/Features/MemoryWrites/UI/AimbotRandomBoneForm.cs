@@ -1,5 +1,6 @@
-﻿using arena_dma_radar.Arena.Features.MemoryWrites;
-using arena_dma_radar.UI.Misc;
+﻿using LonesArenaRadar;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.UI.Misc;
 
 namespace arena_dma_radar.Features.MemoryWrites.UI
 {

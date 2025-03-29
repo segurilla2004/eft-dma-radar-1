@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.UI.ESP;
-using arena_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
+﻿using arena_dma_radar.UI.Radar;
+using Common.Maps;
+using Common.Misc;
+using Common.Unity;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using LonesArenaRadar.UI.ESP;
 
-namespace arena_dma_radar.UI.Misc
+namespace LonesArenaRadar.UI.Misc
 {
     public sealed class ScreenEntry
     {
@@ -76,7 +76,7 @@ namespace arena_dma_radar.UI.Misc
                 clientArea.Width / 2 - labelWidth / 2,
                 top,
                 clientArea.Width / 2 + labelWidth / 2,
-                top + (labelHeight * lines.Length) + spacing);
+                top + labelHeight * lines.Length + spacing);
             canvas.DrawRect(bgRect, SKPaints.PaintTransparentBacker);
             var textLoc = new SKPoint(clientArea.Width / 2, top + labelHeight);
             foreach (var line in lines)
@@ -96,8 +96,8 @@ namespace arena_dma_radar.UI.Misc
         public static Vector2 ToMapPos(this Vector3 vector, LoneMapConfig map) =>
             new()
             {
-                X = (map.X * map.SvgScale) + vector.X * (map.Scale * map.SvgScale),
-                Y = (map.Y * map.SvgScale) - vector.Z * (map.Scale * map.SvgScale)
+                X = map.X * map.SvgScale + vector.X * (map.Scale * map.SvgScale),
+                Y = map.Y * map.SvgScale - vector.Z * (map.Scale * map.SvgScale)
             };
 
         /// <summary>

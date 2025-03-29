@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Misc.Data
+namespace Common.Misc.Data
 {
     /// <summary>
     /// Class JSON Representation of Tarkov Market Data.

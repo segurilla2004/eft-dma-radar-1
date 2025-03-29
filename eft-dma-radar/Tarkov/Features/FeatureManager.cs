@@ -1,14 +1,14 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_radar.Tarkov.Features.MemoryWrites;
-using eft_dma_radar.Tarkov.GameWorld;
-using eft_dma_radar.UI.Misc;
-using eft_dma_shared.Common.DMA;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity.LowLevel;
-using eft_dma_shared.Common.Unity.LowLevel.Hooks;
+﻿using eft_dma_shared.Common.DMA.ScatterAPI;
+using LonesEFTRadar.Tarkov.GameWorld;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.Tarkov.Features.MemoryWrites;
+using Common.Features;
+using Common.Unity.LowLevel.Hooks;
+using Common.Unity.LowLevel;
+using Common.DMA;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.Features
+namespace LonesEFTRadar.Tarkov.Features
 {
     /// <summary>
     /// Feature Manager Thread.
@@ -46,8 +46,8 @@ namespace eft_dma_radar.Tarkov.Features
                             {
                                 NativeHook.Initialize();
                             }
-                            if (NativeHook.Initialized && 
-                                Chams.Config.Mode is not ChamsManager.ChamsMode.Basic && 
+                            if (NativeHook.Initialized &&
+                                Chams.Config.Mode is not ChamsManager.ChamsMode.Basic &&
                                 ChamsManager.Materials.Count == 0)
                             {
                                 ChamsManager.Initialize();

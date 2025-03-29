@@ -1,8 +1,8 @@
-﻿using arena_dma_radar.Arena.GameWorld;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Players;
+using Common.Unity;
+using LonesArenaRadar.Arena.GameWorld;
 
-namespace arena_dma_radar.Arena.ArenaPlayer
+namespace LonesArenaRadar.Arena.ArenaPlayer
 {
     public class ArenaClientPlayer : Player
     {
@@ -78,7 +78,7 @@ namespace arena_dma_radar.Arena.ArenaPlayer
                 ArgumentOutOfRangeException.ThrowIfEqual(TeamID, -1, nameof(TeamID)); MovementContext = GetMovementContext();
             RotationAddress = ValidateRotationAddr(MovementContext + Offsets.MovementContext._rotation);
             /// Setup Transforms
-            this.Skeleton = new Skeleton(this, GetTransformInternalChain);
+            Skeleton = new Skeleton(this, GetTransformInternalChain);
             if (this is LocalPlayer) // Handled in derived class
                 return;
 

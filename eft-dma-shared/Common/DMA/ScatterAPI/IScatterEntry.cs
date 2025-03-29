@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Misc.Pools;
+﻿using Common.Misc.Pools;
 
-namespace eft_dma_shared.Common.DMA.ScatterAPI
+namespace Common.DMA.ScatterAPI
 {
     public interface IScatterEntry : IPooledObject<IScatterEntry>
     {

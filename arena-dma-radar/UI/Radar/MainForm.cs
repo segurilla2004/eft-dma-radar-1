@@ -1,24 +1,28 @@
 using DarkModeForms;
 using arena_dma_radar.Features.MemoryWrites.UI;
-using arena_dma_radar.Arena.ArenaPlayer;
-using arena_dma_radar.Arena.GameWorld;
 using arena_dma_radar.UI.ColorPicker;
-using arena_dma_radar.UI.ColorPicker.ESP;
-using arena_dma_radar.UI.ColorPicker.Radar;
 using arena_dma_radar.UI.ESP;
 using arena_dma_radar.UI.Hotkeys;
-using arena_dma_radar.UI.Misc;
 using static arena_dma_radar.UI.Hotkeys.HotkeyManager;
 using static arena_dma_radar.UI.Hotkeys.HotkeyManager.HotkeyActionController;
-using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Unity.LowLevel;
-using eft_dma_shared.Common.Maps;
-using arena_dma_radar.Arena.Features;
-using arena_dma_radar.Arena.Features.MemoryWrites;
-using arena_dma_radar.Arena.Features.MemoryWrites.Patches;
-using eft_dma_shared.Common.ESP;
+using LonesArenaRadar.UI.Radar;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.Arena.Features.MemoryWrites.Patches;
+using LonesArenaRadar.UI.ColorPicker;
+using LonesArenaRadar.Arena.Features;
+using LonesArenaRadar.UI.ESP;
+using LonesArenaRadar.UI.ColorPicker.ESP;
+using LonesArenaRadar.UI.ColorPicker.Radar;
+using LonesArenaRadar.Arena.GameWorld;
+using LonesArenaRadar.UI.Misc;
+using LonesArenaRadar;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Misc;
+using Common.Features;
+using Common.Unity;
+using Common.Unity.LowLevel;
+using Common.ESP;
+using Common.Maps;
 
 namespace arena_dma_radar.UI.Radar
 {
@@ -105,7 +109,7 @@ namespace arena_dma_radar.UI.Radar
             get
             {
                 var players = AllPlayers?
-                                  .Where(x => x is not Arena.ArenaPlayer.LocalPlayer)
+                                  .Where(x => x is not LonesArenaRadar.Arena.ArenaPlayer.LocalPlayer)
                               ?? Enumerable.Empty<Player>();
 
                 return players.Any() ? players : null;

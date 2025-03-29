@@ -1,7 +1,7 @@
-﻿using eft_dma_radar.Tarkov.Loot;
-using eft_dma_radar.UI.Radar;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.Tarkov.Loot;
 
-namespace eft_dma_radar.UI.LootFilters
+namespace LonesEFTRadar.UI.LootFilters
 {
     /// <summary>
     /// Enumerable Loot Filter Class.
@@ -27,11 +27,11 @@ namespace eft_dma_radar.UI.LootFilters
             {
                 Predicate<LootItem> p = (x) => // Default Predicate
                 {
-                    return (x.IsRegularLoot || x.IsValuableLoot || x.IsImportant || x.IsWishlisted) ||
-                                (ShowQuestItems && x.IsQuestCondition) ||
-                                (LootFilter.ShowBackpacks && x.IsBackpack) ||
-                                (LootFilter.ShowMeds && x.IsMeds) ||
-                                (LootFilter.ShowFood && x.IsFood);
+                    return x.IsRegularLoot || x.IsValuableLoot || x.IsImportant || x.IsWishlisted ||
+                                ShowQuestItems && x.IsQuestCondition ||
+                                ShowBackpacks && x.IsBackpack ||
+                                ShowMeds && x.IsMeds ||
+                                ShowFood && x.IsFood;
                 };
                 return (item) =>
                 {

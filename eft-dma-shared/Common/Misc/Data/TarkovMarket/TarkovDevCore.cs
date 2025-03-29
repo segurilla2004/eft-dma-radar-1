@@ -2,8 +2,9 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using eft_dma_shared;
 
-namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
+namespace Common.Misc.Data.TarkovMarket
 {
     internal static class TarkovDevCore
     {
@@ -199,7 +200,7 @@ namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
             };
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(100));
             using var response = await SharedProgram.HttpClient.PostAsJsonAsync(
-                requestUri: "https://api.tarkov.dev/graphql", 
+                requestUri: "https://api.tarkov.dev/graphql",
                 value: query,
                 cancellationToken: cts.Token);
             response.EnsureSuccessStatusCode();

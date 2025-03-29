@@ -1,7 +1,7 @@
 ﻿using SkiaSharp;
 using System.Reflection;
 
-namespace eft_dma_shared.Common.Misc
+namespace Common.Misc
 {
     public static class CustomFonts
     {

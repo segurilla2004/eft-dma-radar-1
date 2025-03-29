@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.DMA.ScatterAPI;
+﻿using Common.DMA.ScatterAPI;
 
-namespace eft_dma_shared.Common.Features
+namespace Common.Features
 {
     public interface IMemWriteFeature : IFeature
     {

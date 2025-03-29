@@ -1,9 +1,9 @@
-﻿using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Radar;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Maps;
+using Common.Unity;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Radar;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Exits
+namespace LonesEFTRadar.Tarkov.GameWorld.Exits
 {
     /// <summary>
     /// Defines a contract for a point that can be used to exit the map.

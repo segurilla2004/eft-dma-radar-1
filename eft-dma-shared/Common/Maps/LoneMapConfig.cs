@@ -1,8 +1,8 @@
-﻿using eft_dma_shared.Common.Misc.Data;
+﻿using Common.Misc.Data;
 using SkiaSharp;
 using System.Text.Json.Serialization;
 
-namespace eft_dma_shared.Common.Maps
+namespace Common.Maps
 {
     /// <summary>
     /// Defines a .JSON Map Config File
@@ -94,7 +94,7 @@ namespace eft_dma_shared.Common.Maps
 
             public LoadedLayer(SKImage image, Layer layer)
             {
-                this.Image = image;
+                Image = image;
                 _layer = layer;
             }
 
@@ -111,11 +111,11 @@ namespace eft_dma_shared.Common.Maps
             /// <summary>
             /// Minimum Height for this Layer.
             /// </summary>
-            private float MinHeight => this._layer.MinHeight ?? float.MinValue;
+            private float MinHeight => _layer.MinHeight ?? float.MinValue;
             /// <summary>
             /// Maximum Height for this Layer.
             /// </summary>
-            private float MaxHeight => this._layer.MaxHeight ?? float.MaxValue;
+            private float MaxHeight => _layer.MaxHeight ?? float.MaxValue;
 
             public static bool operator <(LoadedLayer a, LoadedLayer b)
             {
@@ -156,7 +156,7 @@ namespace eft_dma_shared.Common.Maps
 
             public void Dispose()
             {
-                this.Image?.Dispose();
+                Image?.Dispose();
             }
         }
     }

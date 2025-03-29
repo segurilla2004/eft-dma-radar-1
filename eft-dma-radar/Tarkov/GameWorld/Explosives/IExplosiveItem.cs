@@ -1,8 +1,8 @@
-﻿using eft_dma_radar.UI.ESP;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Maps;
+using Common.Unity;
+using LonesEFTRadar.UI.ESP;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Explosives
+namespace LonesEFTRadar.Tarkov.GameWorld.Explosives
 {
     public interface IExplosiveItem : IWorldEntity, IMapEntity, IESPEntity
     {

@@ -1,6 +1,6 @@
-﻿using arena_dma_radar.UI.Misc;
+﻿using LonesArenaRadar.UI.Misc;
 
-namespace arena_dma_radar.UI.ColorPicker.ESP
+namespace LonesArenaRadar.UI.ColorPicker.ESP
 {
     public enum EspColorOption
     {

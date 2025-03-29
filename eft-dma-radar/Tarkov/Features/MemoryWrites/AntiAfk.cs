@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Features;
-using eft_dma_shared.Common.Unity;
+﻿using Common.Features;
+using Common.Unity;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class AntiAfk : MemWriteFeature<AntiAfk>
     {

@@ -1,8 +1,9 @@
-﻿using eft_dma_radar.Tarkov.Loot;
-using eft_dma_shared.Common.Misc.Data;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using Common.Misc.Data;
+using Common.Unity.Collections;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.Tarkov.Loot;
 
-namespace eft_dma_radar.Tarkov.EFTPlayer.Plugins
+namespace LonesEFTRadar.Tarkov.EFTPlayer.Plugins
 {
     public sealed class HandsManager
     {

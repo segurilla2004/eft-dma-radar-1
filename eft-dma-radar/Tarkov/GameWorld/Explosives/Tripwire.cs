@@ -1,13 +1,13 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.Misc;
+﻿using Common.Maps;
+using Common.Players;
+using Common.Unity;
 using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Unity;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.UI.Misc;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Explosives
+namespace LonesEFTRadar.Tarkov.GameWorld.Explosives
 {
     /// <summary>
     /// Represents a Tripwire (with attached Grenade) in Local Game World.
@@ -29,8 +29,8 @@ namespace eft_dma_radar.Tarkov.GameWorld.Explosives
         public Tripwire(ulong baseAddr)
         {
             Addr = baseAddr;
-            this.IsActive = GetIsTripwireActive(false);
-            if (this.IsActive)
+            IsActive = GetIsTripwireActive(false);
+            if (IsActive)
             {
                 _position = GetPosition(false);
             }
@@ -38,10 +38,10 @@ namespace eft_dma_radar.Tarkov.GameWorld.Explosives
 
         public void Refresh()
         {
-            this.IsActive = GetIsTripwireActive();
-            if (this.IsActive)
+            IsActive = GetIsTripwireActive();
+            if (IsActive)
             {
-                this.Position = GetPosition();
+                Position = GetPosition();
             }
         }
 

@@ -1,10 +1,11 @@
-﻿using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc;
+﻿using Common.ESP;
+using Common.Misc;
+using eft_dma_shared;
 using SkiaSharp;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Unity
+namespace Common.Unity
 {
     public abstract class CameraManagerBase
     {
@@ -90,7 +91,7 @@ namespace eft_dma_shared.Common.Unity
 
             if (IsScoped)
             {
-                float angleRadHalf = (MathF.PI / 180f) * _fov * 0.5f;
+                float angleRadHalf = MathF.PI / 180f * _fov * 0.5f;
                 float angleCtg = MathF.Cos(angleRadHalf) / MathF.Sin(angleRadHalf);
 
                 x /= angleCtg * _aspect * 0.5f;

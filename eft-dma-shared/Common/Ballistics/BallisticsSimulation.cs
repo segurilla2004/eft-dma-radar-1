@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace eft_dma_shared.Common.Ballistics
+namespace Common.Ballistics
 {
     public static class BallisticsSimulation
     {

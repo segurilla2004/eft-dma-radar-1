@@ -1,6 +1,6 @@
-﻿using eft_dma_shared.Common.Features;
+﻿using Common.Features;
 
-namespace eft_dma_radar.Tarkov.Features.MemoryWrites
+namespace LonesEFTRadar.Tarkov.Features.MemoryWrites
 {
     public sealed class RageMode : MemWriteFeature<RageMode>
     {

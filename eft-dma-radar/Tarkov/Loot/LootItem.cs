@@ -1,15 +1,17 @@
-﻿using eft_dma_radar.Tarkov.EFTPlayer;
-using eft_dma_radar.UI.ESP;
-using eft_dma_radar.UI.LootFilters;
-using eft_dma_radar.UI.Radar;
-using eft_dma_radar.UI.Misc;
-using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Unity;
-using eft_dma_shared.Common.Maps;
-using eft_dma_shared.Common.Players;
-using eft_dma_shared.Common.Misc.Data;
+﻿using eft_dma_radar.UI.Radar;
+using LonesEFTRadar.UI.Radar;
+using LonesEFTRadar.UI.Misc;
+using LonesEFTRadar.UI.ESP;
+using LonesEFTRadar.Tarkov.EFTPlayer;
+using LonesEFTRadar;
+using LonesEFTRadar.UI.LootFilters;
+using Common.Unity;
+using Common.Misc.Data;
+using Common.Misc;
+using Common.Maps;
+using Common.Players;
 
-namespace eft_dma_radar.Tarkov.Loot
+namespace LonesEFTRadar.Tarkov.Loot
 {
     public class LootItem : IMouseoverEntity, IMapEntity, IWorldEntity, IESPEntity
     {
@@ -229,7 +231,7 @@ namespace eft_dma_radar.Tarkov.Loot
             var dist = Vector3.Distance(localPlayer.Position, Position);
             if (this is QuestItem)
             {
-               if (dist > ESP.Config.QuestHelperDrawDistance)
+                if (dist > ESP.Config.QuestHelperDrawDistance)
                     return;
             }
             else if (this is not QuestItem && (IsImportant || IsValuableLoot))
@@ -389,19 +391,19 @@ namespace eft_dma_radar.Tarkov.Loot
             else if (this is QuestItem)
                 return new(SKPaints.QuestHelperPaint, SKPaints.QuestHelperText);
             else if (MainForm.Config.QuestHelper.Enabled && IsQuestCondition)
-                return new (SKPaints.PaintQuestItem, SKPaints.TextQuestItem);
+                return new(SKPaints.PaintQuestItem, SKPaints.TextQuestItem);
             if (LootFilter.ShowBackpacks && IsBackpack)
                 return new(SKPaints.PaintBackpacks, SKPaints.TextBackpacks);
             if (LootFilter.ShowMeds && IsMeds)
-                return new (SKPaints.PaintMeds, SKPaints.TextMeds);
+                return new(SKPaints.PaintMeds, SKPaints.TextMeds);
             if (LootFilter.ShowFood && IsFood)
-                return new (SKPaints.PaintFood, SKPaints.TextFood);
+                return new(SKPaints.PaintFood, SKPaints.TextFood);
             string filterColor = null;
             if (this is LootContainer ctr)
             {
                 filterColor = ctr.Loot?.FirstOrDefault(x => x.Important)?.CustomFilter?.Color;
                 if (filterColor is null && this is LootCorpse)
-                    return new (SKPaints.PaintCorpse, SKPaints.TextCorpse);
+                    return new(SKPaints.PaintCorpse, SKPaints.TextCorpse);
             }
             else
             {
@@ -411,11 +413,11 @@ namespace eft_dma_radar.Tarkov.Loot
             if (!string.IsNullOrEmpty(filterColor))
             {
                 var filterPaints = GetFilterPaints(filterColor);
-                return new (filterPaints.Item1, filterPaints.Item2);
+                return new(filterPaints.Item1, filterPaints.Item2);
             }
             if (IsValuableLoot || this is LootAirdrop)
-                return new (SKPaints.PaintImportantLoot, SKPaints.TextImportantLoot);
-            return new (SKPaints.PaintLoot, SKPaints.TextLoot);
+                return new(SKPaints.PaintImportantLoot, SKPaints.TextImportantLoot);
+            return new(SKPaints.PaintLoot, SKPaints.TextLoot);
         }
 
         public ValueTuple<SKPaint, SKPaint> GetESPPaints()
@@ -427,7 +429,7 @@ namespace eft_dma_radar.Tarkov.Loot
             else if (this is QuestItem)
                 return new(SKPaints.PaintQuestHelperESP, SKPaints.TextQuestHelperESP);
             else if (MainForm.Config.QuestHelper.Enabled && IsQuestCondition)
-                return new (SKPaints.PaintQuestItemESP, SKPaints.TextQuestItemESP);
+                return new(SKPaints.PaintQuestItemESP, SKPaints.TextQuestItemESP);
             if (LootFilter.ShowBackpacks && IsBackpack)
                 return new(SKPaints.PaintBackpackESP, SKPaints.TextBackpackESP);
             if (LootFilter.ShowMeds && IsMeds)
@@ -444,7 +446,7 @@ namespace eft_dma_radar.Tarkov.Loot
                 var filterPaints = GetFilterPaints(filterColor);
                 return new(filterPaints.Item3, filterPaints.Item4);
             }
-            return IsImportant || IsValuableLoot ? 
+            return IsImportant || IsValuableLoot ?
                 new(SKPaints.PaintImpLootESP, SKPaints.TextImpLootESP) : new(SKPaints.PaintLootESP, SKPaints.TextLootESP);
         }
 
@@ -526,7 +528,7 @@ namespace eft_dma_radar.Tarkov.Loot
         public static IEnumerable<LootItem> OrderLoot(this IEnumerable<LootItem> loot)
         {
             return loot
-                .OrderByDescending(x => x.IsImportant || (MainForm.Config.QuestHelper.Enabled && x.IsQuestCondition))
+                .OrderByDescending(x => x.IsImportant || MainForm.Config.QuestHelper.Enabled && x.IsQuestCondition)
                 .ThenByDescending(x => x.Price);
         }
     }

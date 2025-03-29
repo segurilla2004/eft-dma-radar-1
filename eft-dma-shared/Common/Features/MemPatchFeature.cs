@@ -1,7 +1,7 @@
-﻿using eft_dma_shared.Common.Misc;
+﻿using Common.Misc;
 using System.Diagnostics;
 
-namespace eft_dma_shared.Common.Features
+namespace Common.Features
 {
     public abstract class MemPatchFeature<T> : IFeature, IMemPatchFeature
         where T : IMemPatchFeature

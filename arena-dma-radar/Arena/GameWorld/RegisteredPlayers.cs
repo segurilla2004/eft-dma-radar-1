@@ -1,11 +1,11 @@
-﻿using arena_dma_radar.Arena.ArenaPlayer;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity.Collections;
-using arena_dma_radar.Arena.Features;
-using arena_dma_radar.Arena.Features.MemoryWrites;
-using eft_dma_shared.Common.Misc;
+﻿using LonesArenaRadar.Arena.Features;
+using LonesArenaRadar.Arena.Features.MemoryWrites;
+using LonesArenaRadar.Arena.ArenaPlayer;
+using Common.Unity.Collections;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace arena_dma_radar.Arena.GameWorld
+namespace LonesArenaRadar.Arena.GameWorld
 {
     public sealed class RegisteredPlayers : IReadOnlyCollection<Player>
     {
@@ -42,13 +42,13 @@ namespace arena_dma_radar.Arena.GameWorld
                 if (mainPlayer != LocalPlayer)
                 {
                     lock (MemWrites.SyncRoot) // Prevent race conditions with DMA Toolkit
-                    lock (Aimbot.SyncRoot) // and Aimbot
-                    {
-                        LoneLogging.WriteLine("Re-Allocating LocalPlayer (Memory Address Changed)");
-                        var localPlayer = new LocalPlayer(mainPlayer);
-                        _players.Clear();
-                        _players[localPlayer] = LocalPlayer = localPlayer;
-                    }
+                        lock (Aimbot.SyncRoot) // and Aimbot
+                        {
+                            LoneLogging.WriteLine("Re-Allocating LocalPlayer (Memory Address Changed)");
+                            var localPlayer = new LocalPlayer(mainPlayer);
+                            _players.Clear();
+                            _players[localPlayer] = LocalPlayer = localPlayer;
+                        }
                 }
                 ArgumentNullException.ThrowIfNull(LocalPlayer, nameof(LocalPlayer));
                 using var playersList = MemList<ulong>.Get(this, false); // Realtime Read

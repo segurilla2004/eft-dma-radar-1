@@ -1,8 +1,9 @@
-﻿using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.DMA.ScatterAPI;
-using eft_dma_shared.Common.Unity.Collections;
+﻿using eft_dma_radar.Tarkov.GameWorld.Exits;
+using Common.Unity.Collections;
+using Common.DMA.ScatterAPI;
+using Common.Misc;
 
-namespace eft_dma_radar.Tarkov.GameWorld.Exits
+namespace LonesEFTRadar.Tarkov.GameWorld.Exits
 {
     /// <summary>
     /// List of PMC/Scav 'Exits' in Local Game World and their position/status.
